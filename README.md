@@ -30,5 +30,5 @@ Things you may want to cover:
 - User - focused on the user
 - Submission - The creates this
 - Community - Category based on submissions
-- Comments - A place for a friendly chats below posts. Allows users to talk with eachother.
+- Comments - A place for a friendly chats below posts. Allows users to talk with each other.
 - Subscription - The user joins a community.
