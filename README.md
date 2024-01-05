@@ -5,20 +5,30 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- Ruby/Rails version
+  - Ruby: 3.3.0
+  - Rails: 7.1.2
+- System dependencies
 
-* System dependencies
+  - Node 20
+  - yarn
 
-* Configuration
+- Configuration
 
-* Database creation
+- Database creation
 
-* Database initialization
+- Database initialization
 
-* How to run the test suite
+- How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+- Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+- Deployment instructions
 
-* ...
+## Modeling
+
+- User - focused on the user
+- Submission - The creates this
+- Community - Category based on submissions
+- Comments - A place for a friendly chats below posts. Allows users to talk with eachother.
+- Subscription - The user joins a community.
