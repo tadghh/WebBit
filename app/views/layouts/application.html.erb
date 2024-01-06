@@ -8,8 +8,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-  <body class="overflow-x-hidden relative h-screen bg-red-700">
-    <%= render_svg "icons/delete" %>
+  <body class="overflow-x-hidden relative h-screen bg-gray-700">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% flash.each do | type, message| %>
@@ -28,6 +27,49 @@
         </div>
       <% end %>
     <% end %>
+    <nav class="py-2 bg-white border-b border-gray-400" role="navigation" aria-label="main navigation">
+      <div class="flex flex-wrap justify-center items-center px-4 space-x-3 lg:justify-start lg:content-center lg:px-6" >
+        <%= link_to root_path, class: "leading-normal no-underline text-gray-800 my-2 md:my-0 hover:text-purple-600" do %>
+          <h1 class="pr-2 text-lg font-semibold uppercase"> Webbit</h1>
+        <% end %>
+        <%# <div class="px-0 mb-2 w-full lg:w-1/4 md:px-2 lg:mb-0">
+
+        </div> %>
+        <div class="flex flex-wrap flex-1 justify-start w-full lg:w-2/3">
+          <div class="flex flex-1 items-center space-x-3 w-1/3">
+            <div >
+              <div class="relative">
+                <select name="" id="">
+                  <option value="">Community 1</option>
+                  <option value="">Community 2</option>
+                  <option value="">Community 3</option>
+                </select>
+              </div>
+            </div>
+            <div  >
+              <div class="relative">
+                <input type="text" class="pl-10 input" placeholder="Search Webbit" >
+                <div class="flex absolute top-0 left-0 items-center pointer-events-none">
+                  <%= render_svg "icons/search", styles: "stroke-current w-5 h-5 text-gray-500" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-end items-center pt-4 lg:pt-0">
+            <div class="mr-3">
+              <% if user_signed_in? %>
+                <%= link_to new_submission_path do%>
+                  <%= render_svg "icons/create" %>
+                <% end %>
+              <% else %>
+                <%= link_to "Login", new_user_session_path, class: "btn btn-outline btn-sm mr-2"%>
+                <%= link_to "Sign up", new_user_registration_path, class: "btn btn-indigo btn-small"%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
