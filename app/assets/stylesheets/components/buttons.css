@@ -1,9 +1,9 @@
 .btn {
-	@apply px-6 py-3 text-lg font-semibold no-underline rounded cursor-pointer;
+	@apply px-6 py-3 font-semibold no-underline rounded cursor-pointer;
 }
 
 .btn-small {
-	@apply px-4 py-2 text-sm font-bold rounded;
+	@apply px-4 py-2 text-sm font-semibold rounded;
 }
 
 .btn-indigo {
