@@ -11,14 +11,14 @@
   <body class="overflow-x-hidden relative h-screen bg-gray-200">
     <% flash.each do | type, message| %>
       <% if type == "alert" %>
-        <div class=".bg-red-500" >
+        <div class="bg-red-500" >
           <div class="container px-2 py-4 mx-auto font-medium text-center text-white font-san">
             <%= message %>
           </div>
         </div>
       <% end %>
       <% if type == "notice" %>
-        <div class=".bg-green-500" >
+        <div class="bg-green-500" >
           <div class="container px-2 py-4 mx-auto font-medium text-center text-white font-san">
             <%= message %>
           </div>
@@ -59,45 +59,48 @@
                 <%= link_to new_submission_path do%>
                   <%= render_svg "icons/create" %>
                 <% end %>
-                <div class="ml-1 text-gray-600 bg-white rounded border border-gray-400 hover:bg-gray-200">
-                  <div class="pt-2 pr-1 pl-3 mb-2">
-                    <%= link_to "#", class: "no-underline flex justify-between text-xs tracking-wide items-center font-semibold" do %>
-                      <%= current_user.username ||= current_user.email %>
-                      <%= render_svg "icons/chevron-down" %>
-                    <% end %>
-                    <ul>
-                      <li>
-                        <%= link_to "#", class:"flex items-center px-4 py-2 text-sm text-gray-700 no-underline hover:bg-indigo-600 hover:text-white" do %>
-                          <%= render_svg "icons/user", styles: "w-5 h-5 fill-current text-gray-600 mr-3"%>
-                          My Profile
-                        <% end%>
-                      </li>
-                      <li>
-                        <%= link_to edit_user_registration_path, class:"flex items-center px-4 py-2 text-sm text-gray-700 no-underline hover:bg-indigo-600 hover:text-white" do %>
-                          <%= render_svg "icons/settings", styles: "w-5 h-5 fill-current text-gray-600 mr-3"%>
-                          Account Settings
-                        <% end%>
-                      </li>
-                      <li>
-                        <%= button_to destroy_user_session_path, method: :delete,class:"flex items-center px-4 py-2 text-sm text-gray-700 no-underline hover:bg-indigo-600 hover:text-white" do %>
-                          <%= render_svg "icons/signout", styles: "w-5 h-5 fill-current text-gray-600 mr-3"%>
-                          Logout
-                        <% end%>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               <% else %>
-                <%= link_to "Login", new_user_session_path, class: "btn btn-outline mr-2"%>
-                <%= link_to "Sign up", new_user_registration_path, class: "btn btn-indigo "%>
+                <%= link_to "Login", new_user_session_path, class: "btn btn-small btn-outline mr-2"%>
+                <%= link_to "Sign up", new_user_registration_path, class: "btn btn-small btn-indigo "%>
               <% end %>
             </div>
+            <% if user_signed_in? %>
+              <div class="ml-1 text-gray-600 bg-white rounded border border-gray-400 hover:bg-gray-200">
+                <div class="pt-2 pr-1 pl-3 mb-2">
+                  <%= link_to "#", class: "no-underline flex justify-between text-xs tracking-wide items-center font-semibold" do %>
+                    <%=  current_user.email ||= current_user.username%>
+                    <%= render_svg "icons/chevron-down" %>
+                  <% end %>
+                  <ul >
+                    <li>
+                      <%= link_to "#", class:"flex items-center px-4 py-2 text-sm text-gray-700 no-underline hover:bg-indigo-600 hover:text-white" do %>
+                        <%= render_svg "icons/user", styles: "w-5 h-5 fill-current text-gray-600 mr-3"%>
+                        My Profile
+                      <% end%>
+                    </li>
+                    <li>
+                      <%= link_to edit_user_registration_path, class:"flex items-center px-4 py-2 text-sm text-gray-700 no-underline hover:bg-indigo-600 hover:text-white" do %>
+                        <%= render_svg "icons/settings", styles: "w-5 h-5 fill-current text-gray-600 mr-3"%>
+                        Account Settings
+                      <% end%>
+                    </li>
+                    <li>
+                      <%= button_to destroy_user_session_path, method: :delete,class:"flex items-center px-4 py-2 text-sm text-gray-700 no-underline hover:bg-indigo-600 hover:text-white" do %>
+                        <%= render_svg "icons/signout", styles: "w-5 h-5 fill-current text-gray-600 mr-3"%>
+                        Logout
+                      <% end%>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
-    </nav>
-    <div class="container py-6 mx-auto">
-      <%= yield %>
     </div>
-  </body>
+  </nav>
+  <div class="container py-6 mx-auto">
+    <%= yield %>
+  </div>
+</body>
 </html>
