@@ -1,80 +1,65 @@
-# syntax = docker/dockerfile:1
+# Dockerfile rails
+FROM ruby:alpine as base_deps
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.3.0
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+# common deps
+RUN apk add --update \
+    build-base \
+    git \
+    tzdata
 
-# Rails app lives here
-WORKDIR /rails
+# Application deps
+RUN apk add --update \
+    nodejs \
+    postgresql-client \
+    postgresql-dev \
+    yarn
 
-# Set production environment
-ENV RAILS_ENV="development" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+WORKDIR /app
+# install bundler
+RUN gem install bundler
+# install rails
+RUN gem install rails
 
+FROM base_deps as ruby_deps
+WORKDIR /app
+# Install gems
+ADD Gemfile* ./
+RUN bundle install
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build gems and node modules
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl git libvips node-gyp pkg-config python-is-python3
-
-# Install JavaScript dependencies
-ARG NODE_VERSION=20.10.0
-ARG YARN_VERSION=latest
-ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    npm install -g yarn@$YARN_VERSION && \
-    rm -rf /tmp/node-build-master
-
-# Install application gems
-COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
-
+FROM ruby_deps as node_deps
+WORKDIR /app
 # Install node modules
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+ADD package.json *yarn* ./
+RUN yarn install --check-files
 
-# Copy application code
-COPY . .
+FROM node_deps as test_deps
+COPY --from=ruby_deps /usr/local/bundle/ /usr/local/bundle/
+COPY --from=node_deps ./app/node_modules /app/node_modules/
+RUN apk add --update \
+    chromium \
+    chromium-chromedriver  \
+    python3 \
+    python3-dev \
+    py3-pip
+RUN pip3 install -U selenium
+RUN bundle install --with test
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
-
-# Adjust binfiles to be executable on Linux
-RUN chmod +x bin/* && \
-    sed -i "s/\r$//g" bin/* && \
-    sed -i 's/ruby\.exe$/ruby/' bin/*
-
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# A separate build stage installs test dependencies and runs your tests
+FROM test_deps AS test
+WORKDIR /app
+ENV DATABASE_HOST=docker.for.mac.localhost
+# The test stage installs the test dependencies
+# The actual test run
+CMD ["bundle", "exec", "rspec"]
 
 
-# Final stage for app image
-FROM base
+# A separate build stage installs test dependencies and runs your tests
+FROM node_deps AS dev_deps
+COPY --from=ruby_deps /usr/local/bundle/ /usr/local/bundle/
+COPY --from=node_deps ./app/node_modules /app/node_modules/
+# The test stage installs the test dependencies
+RUN bundle install --with test development
 
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
-
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
-USER rails:rails
-
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+FROM dev_deps AS dev
+WORKDIR /app
+CMD ["bin/dev_entry"]
