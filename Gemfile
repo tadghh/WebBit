@@ -80,3 +80,4 @@ gem 'solargraph', '~> 0.50.0'
 gem 'ruby-lsp', '~> 0.13.2'
 
 gem 'htmlbeautifier'
+gem 'rubocop-rails', require: false

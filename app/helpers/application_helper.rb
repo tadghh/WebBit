@@ -1,4 +1,4 @@
-# frozen_string_literal: true # rubocop:disable Layout/EndOfLine
+# frozen_string_literal: true
 
 module ApplicationHelper # rubocop:disable Style/Documentation
   def render_svg(name, options = {})
