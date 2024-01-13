@@ -15,12 +15,13 @@
 <% content_for :primary_content do %>
 	<h1>Submissions</h1>
 	<div id="submissions">
-		<% @submissions.each do |submission| %>
-			<%= render submission%>
-			<p>
-				<%= link_to "Show this submission", submission%>
-			</p>
-		<% end%>
+		<ul class="divide-y">
+			<% @submissions.each do |submission| %>
+				<%= render submission%>
+
+			<% end%>
+		</ul>
+
 	</div>
 <% end %>
 <% content_for :secondary_content do%>
