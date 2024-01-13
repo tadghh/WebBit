@@ -1,7 +1,17 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New submission</h1>
+<% content_for :primary_content do%>
 
-  <%= render "form", submission: @submission %>
+	<h1 class="mb-6 text-4xl font-bold">New submission</h1>
 
-  <%= link_to "Back to submissions", submissions_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+	<%= render "form", submission: @submission %>
+
+<% end%>
+<div>
+
+	<%= link_to "Back to submissions", submissions_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
 </div>
+<% content_for :secondary_content do%>
+	<%= render "guidelines" %>
+<% end%>
+
+<%= render "basic_layout"%>

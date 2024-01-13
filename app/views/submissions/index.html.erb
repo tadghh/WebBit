@@ -1,30 +1,27 @@
-<%# <div class="w-full">
-	<% if notice.present?
-		<p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 bg-green-50 rounded-lg" id="notice"><%= notice </p>
-	<% end
-
-	<div class="flex justify-between items-center">
-		<h1 class="text-4xl font-bold">Submissions</h1>
-		<%= link_to "New submission", new_submission_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"
-	</div>
-
-	<div id="submissions" class="min-w-full">
-		<%= render @submissions
-	</div>
-</div> %>
 <% content_for :primary_content do %>
-	<h1>Submissions</h1>
-	<div id="submissions">
-		<ul class="divide-y">
-			<% @submissions.each do |submission| %>
-				<%= render submission%>
+	<% if @submissions.any? %>
+		<div id="submissions">
+			<ul class="list-none divide-y">
+				<% @submissions.each do |submission| %>
+					<%= render submission%>
 
-			<% end%>
-		</ul>
+				<% end%>
+			</ul>
 
-	</div>
+		</div>
+	<% else %>
+		<div class="p-10 text-center">
+			<div class="flex justify-center list-none">
+
+				<%= render_svg "icons/empty" %>
+
+			</div>
+			<p class="mb-5">No submissions have been made :'(</p>
+			<%= link_to "Create a new post", new_submission_path, class: "btn btn-indigo"%>
+		</div>
+	<% end %>
 <% end %>
 <% content_for :secondary_content do%>
-	<%= link_to "New submission", new_submission_path %>
+	<%= link_to "New submission", new_submission_path, class:"btn btn-indigo mx-auto" %>
 <% end %>
 <%=  render "basic_layout" %>
