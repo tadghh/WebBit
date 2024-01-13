@@ -15,11 +15,8 @@
 		<div class="mb-6 w-full lg:w-2/5">
 			<label for="">Community</label>
 			<div class="relative">
-				<select class="select" id="">
-					<option value="">Community </option>
-					<option value="">Community </option>
-					<option value="">Community </option>
-				</select>
+
+				<%= form.select :community_id  %>
 				<div class="flex absolute right-2 inset-y-5 items-center pointer-events-none">
 					<%= render_svg "icons/chevron-down", styles: "fill-current w-4 h-4 text-gray-500" %>
 				</div>
