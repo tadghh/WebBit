@@ -1,39 +1,78 @@
-<%= form_with(model: submission, class: "contents") do |form| %>
-	<% if submission.errors.any? %>
-		<div id="error_explanation" class="p-6 text-red-800 bg-red-50 rounded border border-red-300">
-			<h2 class="font-bold leading-tight"><%= pluralize(submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
+<div data-controller="tabs">
 
-			<ul>
-				<% submission.errors.each do |error| %>
-					<li><%= error.full_message %></li>
-				<% end %>
+	<%= form_with(model: submission, class: "contents") do |form| %>
+		<% if submission.errors.any? %>
+			<div id="error_explanation" class="p-6 text-red-800 bg-red-50 rounded border border-red-300">
+				<h2 class="font-bold leading-tight"><%= pluralize(submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+				<ul>
+					<% submission.errors.each do |error| %>
+						<li><%= error.full_message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<div class="mb-6 w-full lg:w-2/5">
+			<label for="">Community</label>
+			<div class="relative">
+				<select class="select" id="">
+					<option value="">Community </option>
+					<option value="">Community </option>
+					<option value="">Community </option>
+				</select>
+				<div class="flex absolute right-2 inset-y-5 items-center pointer-events-none">
+					<%= render_svg "icons/chevron-down", styles: "fill-current w-4 h-4 text-gray-500" %>
+				</div>
+			</div>
+		</div>
+		<label for="submission_type">Submission type</label>
+		<nav role="submission type" class="mb-6">
+			<ul class="grid grid-cols-1 gap-0 border divide-y shadow-sm lg:divide-x lg:grid-cols-3">
+				<li>
+					<a href="" data-action="click->tabs#toggle" data-tabs-target="button" data-tab-id="text" class="flex justify-center items-center p-4 group hover:text-indigo-600">
+						<%= render_svg "icons/text", styles:"group-hover:text-indigo-600 text-gray-500 w-5 h-5 fill-current mr-2" %>
+						Text
+					</a>
+				</li>
+				<li>
+					<a  href="" data-action="click->tabs#toggle" data-tabs-target="button" data-tab-id="media" class="flex justify-center items-center p-4 group hover:text-indigo-600">
+						<%= render_svg "icons/image", styles:"group-hover:text-indigo-600 text-gray-500 w-5 h-5 fill-current mr-2" %>
+						Image/Video
+					</a>
+				</li>
+
+				<li>
+					<a href="" data-action="click->tabs#toggle" data-tabs-target="button" data-tab-id="url" class="flex justify-center items-center p-4 group hover:text-indigo-600">
+						<%= render_svg "icons/link", styles:"group-hover:text-indigo-600 text-gray-500 w-5 h-5 fill-current mr-2" %>
+						URL
+					</a>
+				</li>
 			</ul>
+		</nav>
+		<div class="my-5">
+			<%= form.label :title %>
+			<%= form.text_field :title, class: "input"%>
+		</div>
+
+		<div class="my-5" data-tabs-target="text">
+			<%= form.label :body %>
+			<%= form.text_field :body, class: "input min-h-[200px]" %>
+		</div>
+
+		<div data-tabs-target="url" class="hidden my-5">
+			<%= form.label :url %>
+			<%= form.text_field :url, class: "input"%>
+		</div>
+
+		<div data-tabs-target="media" class="hidden my-5">
+			<%= form.label :media do %>
+				<span class="block mb-1">Attach an Image/Video</span>
+				<%= form.file_field :media, class: "inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-2 ring-inset ring-indigo-600/20"%>
+			<% end%>
+		</div>
+
+		<div class="inline">
+			<%= form.submit class: "btn btn-indigo" %>
 		</div>
 	<% end %>
-
-	<div class="my-5">
-		<%= form.label :title %>
-		<%= form.text_field :title, class: "input"%>
-	</div>
-
-	<div class="my-5">
-		<%= form.label :body %>
-		<%= form.text_field :body, class: "input" %>
-	</div>
-
-	<div class="my-5">
-		<%= form.label :url %>
-		<%= form.text_field :url, class: "input"%>
-	</div>
-
-	<div class="my-5">
-		<%= form.label :media do %>
-			<span class="block mb-1">Attach an Image/Video</span>
-			<%= form.file_field :media, class: "inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-2 ring-inset ring-indigo-600/20"%>
-		<% end%>
-	</div>
-
-	<div class="inline">
-		<%= form.submit class: "btn btn-indigo" %>
-	</div>
-<% end %>
+</div>
