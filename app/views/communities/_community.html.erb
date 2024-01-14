@@ -1,32 +1,28 @@
-<div id="<%= dom_id community %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= community.name %>
-  </p>
+<li id="<%= dom_id community %>" class="py-3">
+	<p class="text-sm text-gray-600">w/<%= community.name %></p>
+	<%= link_to community, class:"hover:text-indigo-600" do %>
+		<h3 class="font-semibold">
+			<%= community.title %>
+		</h3>
+	<% end%>
+	<div class="mb-4 prose prose-indgo"> <%= truncate(community.description, length: 140)%></div>
+	<p class="text-xs text-gray-500">
+		<%= community.updated_at.to_formatted_s(:nice)%>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= community.title %>
-  </p>
+	</p>
+	<% if author_of?(community) %>
+		<div class="flex items-center mt-6 space-x-3">
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= community.description %>
-  </p>
+			<%= link_to edit_community_path(community), class:" btn btn-outline inline-flex items-center text-gray-600 text-sm" do%>
+				<%= render_svg "icons/edit", styles:"w-4 h-4 fill-current text-gray-500 mr-2"%>
+				Edit
+			<% end%>
+			<%= button_to community_path(community), class:" btn btn-outline inline-flex items-center text-gray-600 text-sm hover:text-red-600 group" do%>
+				<%= render_svg "icons/delete", styles:"w-4 h-4 group-hover:text-red-600 mr-2 fill-current text-gray-500",  method: :delete, data: {confirm: "Delete this post?", turbo_method: :delete }%>
+				Delete
+			<% end%>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Sidebar:</strong>
-    <%= community.sidebar %>
-  </p>
+		</div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">User:</strong>
-    <%= community.user_id %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this community", community, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Edit this community", edit_community_path(community), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+	<% end%>
+</li>

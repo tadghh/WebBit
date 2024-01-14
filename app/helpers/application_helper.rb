@@ -10,6 +10,10 @@ module ApplicationHelper # rubocop:disable Style/Documentation
     inline_svg_tag(filename, options)
   end
 
+  def author_of?(resource)
+    user_signed_in? && current_user.id == resource.id
+  end
+
   def nav
     render 'partials/nav'
   end

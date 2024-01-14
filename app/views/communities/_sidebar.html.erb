@@ -1,0 +1,47 @@
+<div class="p-8 rounded">
+	<div class="flex justify-between items-center pb-2 mb-6 border-b">
+		<div class="flex flex-1 items-start">
+			<%= render_svg "icons/conversation", styles: "w-4 mr-2 fill-current text-indigo-600 mr-2 pt-1"%>
+			<div>
+
+				<h1 class="font-mono text-sm leading-tight"> <%= community.name %></h1>
+				<h3 class="text-2xl font-bold leading-tight"> <%= community.title %></h3>
+
+			</div>
+
+		</div>
+		<% if author_of?(community)%>
+			<%= link_to "Edit", edit_community_path(community), class:"underline text-indigo-600 hover:no-underline" %>
+
+		<% end%>
+	</div>
+	<div class="grid grid-cols-2 gap-3 mb-6">
+		<div>
+			<p>Submissions</p>
+			<p class="text-2xl font-bold"> <%=  community.submissions.size%></p>
+		</div>
+		<div >
+			<p>Subscribers</p>
+			<p class="text-2xl font-bold">0</p>
+		</div>
+	</div>
+	<hr class="mb-6">
+
+	<div>
+		<p>Description</p>
+		<div class="my-3 prose prose-indigo">
+			<%= community.description%>
+
+		</div>
+	</div>
+	<hr class="mb-6">
+
+	<div>
+		<p>Sidebar</p>
+		<div class="my-3 prose prose-indigo">
+			<%= community.sidebar%>
+
+		</div>
+	</div>
+
+</div>

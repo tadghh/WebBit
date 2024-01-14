@@ -1,15 +1,34 @@
 <% content_for :community_label, "All communities"%>
-<div class="w-full">
-	<% if notice.present? %>
-		<p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 bg-green-50 rounded-lg" id="notice"><%= notice %></p>
-	<% end %>
 
-	<div class="flex justify-between items-center">
-		<h1 class="text-4xl font-bold">Communities</h1>
-		<%= link_to "New community", new_community_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-	</div>
+<% content_for :primary_content do %>
 
-	<div id="communities" class="min-w-full">
-		<%= render @communities %>
-	</div>
-</div>
+	<% if @communities.any? %>
+		<h1 class="mb-6 text-3xl font-bol">Communities</h1>
+		<div id="communities">
+			<ul class="list-none divide-y">
+				<% @communities.each do |community| %>
+					<%= render community%>
+
+				<% end%>
+			</ul>
+
+		</div>
+	<% else %>
+		<div class="p-10 text-center">
+			<div class="flex justify-center list-none">
+
+				<%= render_svg "icons/empty" %>
+
+			</div>
+			<p class="mb-5">No communities have gathered</p>
+			<%= link_to "Create a new community", new_community_path, class: "btn btn-indigo"%>
+		</div>
+	<%end %>
+
+<%end %>
+<% content_for :secondary_content do%>
+
+	<%= link_to "New community", new_community_path, class:"btn btn-indigo " %>
+
+<% end %>
+<%=  render "basic_layout" %>

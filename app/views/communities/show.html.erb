@@ -1,16 +1,20 @@
 <% content_for :community_label, @community.name%>
-<div class="flex mx-auto w-full md:w-2/3">
-	<div class="mx-auto">
-		<% if notice.present? %>
-			<p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 bg-green-50 rounded-lg" id="notice"><%= notice %></p>
-		<% end %>
 
-		<%= render @community %>
+<div class="py-10 w-full bg-indigo-600">
+	<%= @community.title%>
+	<%= @community.name%>
 
-		<%= link_to "Edit this community", edit_community_path(@community), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-		<div class="inline-block ml-2">
-			<%= button_to "Destroy this community", community_path(@community), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-		</div>
-		<%= link_to "Back to communities", communities_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-	</div>
 </div>
+
+<% content_for :primary_content do %>
+	<% @community.submissions.each do |submission| %>
+		<%=  render "submissions/submission", submission: submission %>
+
+	<%end %>
+<%end %>
+
+<% content_for :secondary_content do%>
+	<%=  render "sidebar", community: @community %>
+
+<% end %>
+<%=  render "basic_layout" %>
