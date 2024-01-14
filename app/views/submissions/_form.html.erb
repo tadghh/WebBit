@@ -16,7 +16,7 @@
 			<label for="">Community</label>
 			<div class="relative">
 
-				<%= form.select :community_id  %>
+				<%= form.select :community_id, Community.all.collect { |v| [v.name,v.id]}, { prompt: "Choose a community"}, {class:"select"}  %>
 				<div class="flex absolute right-2 inset-y-5 items-center pointer-events-none">
 					<%= render_svg "icons/chevron-down", styles: "fill-current w-4 h-4 text-gray-500" %>
 				</div>

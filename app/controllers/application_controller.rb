@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :find_communities
+
+  def find_communities
+    @communities = Community.all.order(:title)
+  end
 
   protected
 

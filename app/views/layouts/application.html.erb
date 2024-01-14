@@ -32,32 +32,49 @@
 				<% end %>
 				<div class="flex flex-col flex-wrap flex-1 justify-start w-full lg:flex-row">
 					<div class="flex flex-wrap flex-1 items-center space-x-6">
+
 						<div class="w-1/3">
-							<div class="relative">
-								<select class="select" name="" id="">
-									<option value="">Community 1</option>
-									<option value="">Community 2</option>
-									<option value="">Community 3</option>
-								</select>
-								<div class="flex absolute right-2 inset-y-5 items-center pointer-events-none">
-									<%= render_svg "icons/chevron-down", styles: "fill-current w-4 h-4 text-gray-500" %>
+							<% if @communities.any? %>
+
+								<div data-controller="dropdown" class="relative ml-1 text-gray-700 bg-white rounded hover:bg-gray-50">
+									<%= link_to "#", class: "border no-underline flex items-center justify-between text-gray-700 py-2 px-3 rounded border-gray-400", data: {action: "click->dropdown#toggle click@window->dropdown#hide "} do %>
+										<span class="text-sm font-semibold">
+											<%= content_for?(:community_label) ?
+											"#{(action_name != "edit" && action_name != "new" && action_name != "index" ? "w/" : "")}#{yield(:community_label)}" :
+											"Select a community" %>
+										</span>
+
+										<div class="flex absolute right-2 inset-y-5 items-center pointer-events-none">
+											<%= render_svg "icons/chevron-down", styles: "fill-current w-4 h-4 text-gray-500" %>
+										</div>
+									<% end %>
+									<ul class="hidden absolute left-0 top-9 rounded-b border border-gray-400 divide-y shadow-lg bg-inherit min-w-56" data-dropdown-target="menu">
+										<% @communities.each do |community| %>
+											<li>
+												<%= link_to community, class:"bg-inherit rounded  dropdown-menu   group " do %>
+													<%= render_svg "icons/conversation", styles: "mr-2 dropdown-menu-item-pic"%> <span>w/</span><%= community.name %>
+												<%end%>
+											</li>
+										<%end%>
+									</ul>
 								</div>
-							</div>
+							<% end  %>
 						</div>
+
 						<div class="flex-1">
 							<div class="relative">
-								<input type="text" class="pl-10 input" placeholder="Search Webbit" >
-								<div class="flex absolute left-2 inset-y-5 items-center pointer-events-none">
-									<%= render_svg "icons/search", styles: "stroke-current w-6 h-6 text-gray-500" %>
+								<input type="text" class="py-2 pl-10 input" placeholder="Search Webbit" >
+								<div class="flex absolute left-2 inset-y-5 items-center pointer-events-none select-none">
+									<%= render_svg "icons/search", styles: "stroke-current w-4 h-4 text-gray-500" %>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="flex flex-wrap justify-end items-center pt-6 pl-6 mx-auto lg:ml-auto lg:pt-0">
+					<div class="flex flex-wrap justify-end items-center pt-6 pl-5 mx-auto lg:ml-auto lg:pt-0">
 						<div class="mr-3">
 							<% if user_signed_in? %>
-								<%= link_to new_submission_path do%>
-									<%= render_svg "icons/create" %>
+								<%= link_to new_submission_path, class: "hover:text-indigo-600 hover:bg-indigo-50  fill-current text-gray-600 rounded-md block p-2" do%>
+									<%= render_svg "icons/create", styles: "", title: "Create submission" %>
 								<% end %>
 							<% else %>
 								<%= link_to "Login", new_user_session_path, class: "btn btn-small btn-outline mr-2"%>
@@ -65,35 +82,35 @@
 							<% end %>
 						</div>
 						<% if user_signed_in? %>
-							<div data-controller="dropdown" class="relative ml-1 text-gray-600 bg-white rounded border border-gray-400 hover:bg-gray-200">
-								<div class="pt-2 pr-1 pl-3 mb-2 w-40">
-									<%= link_to "#", class: " no-underline flex justify-between text-xs tracking-wide items-center font-semibold", data: {action: "click->dropdown#toggle click@window->dropdown#hide"} do %>
-										<%=  current_user.username ||= current_user.email%>
-										<%= render_svg "icons/chevron-down" %>
-									<% end %>
-									<div class="relative">
+							<div data-controller="dropdown" class="relative px-3 py-2 pr-4 mx-auto ml-1 text-gray-600 bg-white rounded border border-gray-400 hover:bg-gray-200">
 
-										<ul class="hidden absolute -right-1 top-2 bg-white rounded border border-gray-400 shadow-lg min-w-56" data-dropdown-target="menu">
-											<li>
-												<%= link_to "#", class:"flex items-center px-4 py-2 text-sm text-gray-700 no-underline hover:bg-indigo-600 hover:text-white group" do %>
-													<%= render_svg "icons/user", styles: "w-5 h-5 fill-current text-gray-600 mr-3 group-hover:text-white"%>
-													My Profile
-												<% end%>
-											</li>
-											<li>
-												<%= link_to edit_user_registration_path, class:"flex items-center px-4 py-2 text-sm text-gray-700 no-underline hover:bg-indigo-600 hover:text-white group" do %>
-													<%= render_svg "icons/settings", styles: "w-5 h-5 fill-current text-gray-600 mr-3 group-hover:text-white"%>
-													Account Settings
-												<% end%>
-											</li>
-											<li>
-												<%= button_to destroy_user_session_path, method: :delete,class:"flex items-center px-4 py-2 text-sm w-full text-gray-700 no-underline hover:bg-indigo-600 hover:text-white group" do %>
-													<%= render_svg "icons/signout", styles: "w-5 h-5 fill-current text-gray-600 mr-3 group-hover:text-white"%>
-													Logout
-												<% end%>
-											</li>
-										</ul>
-									</div>
+								<%= link_to "#", class: " no-underline flex justify-between text-sm tracking-wide items-center font-semibold", data: {action: "click->dropdown#toggle click@window->dropdown#hide"} do %>
+									<%=  current_user.username ||= current_user.email%>
+									<%= render_svg "icons/chevron-down", styles: "ml-2 w-4 h-4" %>
+								<% end %>
+								<div class="relative">
+
+									<ul class="hidden absolute top-2 -right-4 bg-white rounded rounded-tr-none border border-gray-400 shadow-lg min-w-52" data-dropdown-target="menu">
+										<li>
+											<%= link_to "#", class:"   dropdown-menu group" do %>
+												<%= render_svg "icons/user", styles: "dropdown-menu-item-pic"%>
+												My Profile
+											<% end%>
+										</li>
+										<li>
+											<%= link_to edit_user_registration_path, class:"  dropdown-menu group" do %>
+												<%= render_svg "icons/settings", styles: "dropdown-menu-item-pic"%>
+												Account Settings
+											<% end%>
+										</li>
+										<li>
+											<%= button_to destroy_user_session_path, method: :delete, class:" dropdown-menu  group w-full" do %>
+												<%= render_svg "icons/signout", styles: "dropdown-menu-item-pic"%>
+												Logout
+											<% end%>
+										</li>
+									</ul>
+
 								</div>
 							</div>
 						<% end %>

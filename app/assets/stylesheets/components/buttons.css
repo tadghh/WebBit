@@ -19,3 +19,11 @@
 .btn-white {
 	@apply px-4 py-2 text-gray-800 bg-white rounded border-gray-400 shadow-sm hover:bg-gray-50;
 }
+
+.dropdown-menu {
+	@apply flex items-center px-4 py-2 bg-inherit hover:bg-indigo-50 hover:text-indigo-600;
+}
+
+.dropdown-menu-item-pic {
+	@apply mr-3 w-4 h-4 text-gray-500 fill-current group-hover:text-indigo-600;
+}
