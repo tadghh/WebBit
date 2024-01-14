@@ -1,10 +1,6 @@
 <% content_for :community_label, @community.name%>
 
-<div class="py-10 w-full bg-indigo-600">
-	<%= @community.title%>
-	<%= @community.name%>
-
-</div>
+<%= render "header", community: @community%>
 
 <% content_for :primary_content do %>
 	<% @community.submissions.each do |submission| %>
