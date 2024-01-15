@@ -20,9 +20,24 @@ class CommentsController < ApplicationController
 
   def edit; end
 
-  def update; end
+  def update
+    respond_to do |format|
+      format.turbo_stream
+      if @comment.update(comment_params)
+        format.html { redirect_to submission_path(@submission), notice: 'Comment posted successfully' }
+      else
+        format.html { redirect_to submission_path(@submission), alert: 'Comment could not be created' }
+      end
+    end
+  end
 
-  def destroy; end
+  def destroy
+    @comment.destroy
+    # respond_to do |format|
+    #   format.turbo_stream {turbo_stream.remove @comment}
+    #   format.html {redirect_to submission_path(@submission), notice: "Comment deleted"}
+    redirect_to submissions_path(@submission)
+  end
 
   private
 

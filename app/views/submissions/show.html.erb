@@ -52,17 +52,15 @@
 				<%= link_to "Login to reply",new_user_session_path, class: "text-indigo-600 underline"%>
 			</div>
 		<% end%>
+		<%# Add no comments made fluff %>
 		<h3 class="mt-6 font-bold">Comments</h3>
-		<%= if @submission.comments.any? %>
-			<div id="<%= dom_id(@submission)%>_comments_form">
-				<%= render @submission.comments %>
-			</div>
-		<% else%>
-			<div class="my-4">
-				No comments have been made, start some discourse!
+		<div id="<%= dom_id(@submission)%>_comments_form">
+			<%= if @submission.comments.any? %>
 
-			</div>
-		<%end %>
+				<%= render @submission.comments %>
+			<%end %>
+		</div>
+
 	</div>
 <%end%>
 
