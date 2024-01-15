@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
   resources :communities
   resources :submissions do
     resources :comments
@@ -13,4 +14,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'submissions#index'
+
+  resources :profiles, only: :show
 end
