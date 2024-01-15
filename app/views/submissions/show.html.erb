@@ -13,7 +13,7 @@
 			<% end %>
 		</div>
 		<div class="flex-1">
-			<p class="text-sm text-gray-600">Posted By: <%= @submission.user.username%> <%= time_ago_in_words(@submission.created_at) + " ago" %></p>
+			<p class="text-sm text-gray-600">Posted By: <%= link_to @submission.user.username, profile_path(@submission.user), class:"underline"%> <%= time_ago_in_words(@submission.created_at) + " ago" %></p>
 			<h1 class="mb-6 text-3xl font-bold"> <%= @submission.title%></h1>
 			<div class="prose prose-lg prose-indigo">
 

@@ -92,7 +92,7 @@
 
 									<ul class="hidden absolute top-2 -right-4 bg-white rounded rounded-tr-none border border-gray-400 shadow-lg min-w-52" data-dropdown-target="menu">
 										<li>
-											<%= link_to "#", class:"   dropdown-menu group" do %>
+											<%= link_to profile_path(current_user), class:"   dropdown-menu group" do %>
 												<%= render_svg "icons/user", styles: "dropdown-menu-item-pic"%>
 												My Profile
 											<% end%>
