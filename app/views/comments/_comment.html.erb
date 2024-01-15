@@ -1,1 +1,9 @@
-<%= comment.user.username%>
+<div class="p-4 my-4 rounded border">
+	<p class="font-semibold">
+		<%= comment.user.username%>
+	</p>
+	<p class="prose prose-indigo">
+		<%= comment.reply %>
+	</p>
+	<%= link_to "Edit comment", edit_submission_comment_path(comment.submission,comment), class:"text-indigo-600 underline"%>
+</div>
