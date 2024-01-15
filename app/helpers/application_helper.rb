@@ -17,4 +17,11 @@ module ApplicationHelper # rubocop:disable Style/Documentation
   def nav
     render 'partials/nav'
   end
+
+  def gravatar_for(user, options = {})
+    classes = options[:class]
+    gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
+    image_tag(gravatar_url, alt: user.username, class: classes)
+  end
 end

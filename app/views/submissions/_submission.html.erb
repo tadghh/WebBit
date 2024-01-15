@@ -28,7 +28,7 @@
 					<%= truncate(submission.body, length: 140 ) %>
 				</div>
 			<% end %>
-			<% if user_signed_in? && current_user.id == submission.user_id%>
+			<% if author_of?(submission)%>
 				<div class="flex flex-wrap items-center pt-2">
 					<%= link_to edit_submission_path(submission), class:"no-underline mr-2" do %>
 						<%= render_svg "icons/edit", title: "Edit", styles: "fill-current text-gray-400 w-5 h-5 hover:text-indigo-500"%>
