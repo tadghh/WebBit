@@ -31,6 +31,9 @@ class CommentsController < ApplicationController
     end
   end
 
+  def upvote; end
+  def downvote; end
+
   def destroy
     @comment.destroy
     # respond_to do |format|

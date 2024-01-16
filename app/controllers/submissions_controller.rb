@@ -1,5 +1,7 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: %i[show edit update destroy]
+  include ActionView::RecordIdentifier
+
+  before_action :set_submission, only: %i[show edit update destroy upvote downvote]
   before_action :authenticate_user!, except: %i[index show]
 
   # GET /submissions or /submissions.json
@@ -17,6 +19,36 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions/1/edit
   def edit; end
+
+  def upvote # rubocop:disable Metrics/MethodLength
+    respond_to do |format|
+      if current_user.voted_for? @submission
+        format.html { redirect_to submission_path(@submission), alert: 'Voted already' }
+      else
+        @submission.upvote_by current_user
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("#{dom_id(@submission)}_votes_count",
+                                                    @submission.total_vote_count)
+        end
+
+      end
+    end
+  end
+
+  def downvote # rubocop:disable Metrics/MethodLength
+    respond_to do |format|
+      if current_user.voted_for? @submission
+        format.html { redirect_to submission_path(@submission), alert: 'U mad?' }
+      else
+        @submission.downvote_by current_user
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("#{dom_id(@submission)}_votes_count",
+                                                    @submission.total_vote_count)
+        end
+
+      end
+    end
+  end
 
   # POST /submissions or /submissions.json
   def create
