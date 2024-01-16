@@ -1,4 +1,5 @@
 class Submission < ApplicationRecord
+  include VotesCountable
   belongs_to :user
   belongs_to :community
   has_one_attached :media
@@ -8,8 +9,4 @@ class Submission < ApplicationRecord
   validates :body, length: { maximum: 8000, minimum: 10 }
 
   acts_as_votable
-
-  def total_vote_count
-    (get_upvotes.size - get_downvotes.size).to_s
-  end
 end
