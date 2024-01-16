@@ -8,10 +8,12 @@
 			<p class="text-sm text-gray-600">Posted By: <%= link_to @submission.user.username, profile_path(@submission.user), class:"underline"%> <%= time_ago_in_words(@submission.created_at) + " ago" %></p>
 			<h1 class="mb-6 text-3xl font-bold"> <%= @submission.title%></h1>
 
-			<% if @submission.media.video?%>
-				<%= video_tag @submission.media%>
-			<%else%>
-				<%= image_tag @submission.media, alt: @submission.title, class: "rounded-sm "%>
+			<% if @submission.media.attached?%>
+				<% if @submission.media.video?%>
+					<%= video_tag @submission.media%>
+				<%else%>
+					<%= image_tag @submission.media, alt: @submission.title, class: "rounded-sm "%>
+				<%end%>
 			<%end%>
 			<div class="prose prose-lg prose-indigo">
 

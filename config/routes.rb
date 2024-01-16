@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get 'profiles/show'
-  resources :communities
+  resources :communities do
+    resources :subscriptions
+  end
+
   resources :submissions do
     resources :comments
 

@@ -7,11 +7,15 @@ class CommunitiesController < ApplicationController
   end
 
   # GET /communities/1 or /communities/1.json
-  def show; end
+  def show
+    return unless user_signed_in?
+
+    @subscription = @community.subscriptions.where(user: current_user).first
+  end
 
   # GET /communities/new
   def new
-    @community = current_user.communities.build
+    @community = current_user.communities.new
   end
 
   # GET /communities/1/edit
@@ -19,7 +23,8 @@ class CommunitiesController < ApplicationController
 
   # POST /communities or /communities.json
   def create
-    @community = current_user.communities.build(community_params)
+    @community = current_user.communities.new(community_params)
+    @community.user = current_user
 
     respond_to do |format|
       if @community.save

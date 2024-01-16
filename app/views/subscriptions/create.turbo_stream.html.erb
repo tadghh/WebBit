@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{dom_id(@community)}_subscribe" do %>
+	<%= render "subscriptions/actions", community: @community, user: current_user %>
+<%end%>
