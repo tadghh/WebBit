@@ -10,7 +10,10 @@ class SubmissionsController < ApplicationController
   end
 
   # GET /submissions/1 or /submissions/1.json
-  def show; end
+  def show
+    @community = @submission.community
+    @subscription = @community.subscriptions.where(user: current_user).first
+  end
 
   # GET /submissions/new
   def new

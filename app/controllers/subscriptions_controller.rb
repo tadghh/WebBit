@@ -22,7 +22,8 @@ class SubscriptionsController < ApplicationController
     @subscription = @community.subscriptions.where(user_id: current_user).first.destroy
     respond_to do |format|
       format.html do
-        redirect_to community_path(@community), notice: 'No longer part of the X_NAME community :).'
+        redirect_back fallback_location: community_path(@community),
+                      notice: 'No longer part of the X_NAME community :).'
       end
     end
   end
