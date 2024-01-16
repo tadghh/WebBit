@@ -17,27 +17,46 @@
 		<div class="flex-1 <%= "pl-4" if submission.media.attached?  %>">
 			<h3 class="flex flex-wrap items-center mb-1 text-xl font-semibold hover:text-indigo-600">
 				<%= link_to submission.title, submission, class: "no-underline"%>
+
 				<% if submission.url? %>
 					<span class= "pl-2 font-mono text-xs font-normal tracking-tighter text-indigo-400">
 						<%= truncate(submission.url, length: 18 ) %>
 					</span>
 				<% end%>
 			</h3>
+			<p class="mb-2 font-mono text-sm text-gray-600 group hover:text-indigo-600">
+				w/<%= link_to submission.community.name, community_path(submission.community), class:"group-hover:text-indigo-600"%>
+
+			</p>
 			<% if submission.body? %>
 				<div class="text-sm text-gray-900">
 					<%= truncate(submission.body, length: 140 ) %>
 				</div>
 			<% end %>
-			<% if author_of?(submission)%>
-				<div class="flex flex-wrap items-center pt-2">
-					<%= link_to edit_submission_path(submission), class:"no-underline mr-2" do %>
-						<%= render_svg "icons/edit", title: "Edit", styles: "fill-current text-gray-400 w-5 h-5 hover:text-indigo-500"%>
-					<% end%>
-					<%= link_to submission_path(submission), method: :delete, data: {confirm: "Delete this post?", turbo_method: :delete }, class:"no-underline block mt-px" do %>
-						<%= render_svg "icons/delete", title: "Delete", styles: "fill-current text-gray-400 w-5 h-5 hover:text-indigo-500"%>
-					<% end%>
+			<div class="flex flex-wrap items-center">
+				<div class="flex-1 justify-between mt-3">
+					<%= link_to submission_path(submission, anchor:"post_comment_section"), class:"flex items-center space-x-3 group" do %>
+						<%= render "icons/conversation", styles:" group-hover:text-indigo-600 text-gray-500 w-4 h-4 fill-current"%>
+						<p class="group-hover:text-indigo-600">
+							<%= pluralize(submission.comments.size, 'comment')%>
+						</p>
+					<%end %>
+
 				</div>
-			<% end%>
+
+				<% if author_of?(submission)%>
+					<div class="flex flex-wrap items-center pt-2">
+						<%= link_to edit_submission_path(submission), class:"no-underline mr-2" do %>
+							<%= render_svg "icons/edit", title: "Edit", styles: "fill-current text-gray-400 w-5 h-5 hover:text-indigo-500"%>
+						<% end%>
+						<%= link_to submission_path(submission), method: :delete, data: {confirm: "Delete this post?", turbo_method: :delete }, class:"no-underline block mt-px" do %>
+							<%= render_svg "icons/delete", title: "Delete", styles: "fill-current text-gray-400 w-5 h-5 hover:text-indigo-500"%>
+						<% end%>
+					</div>
+				<% end%>
+
+			</div>
+
 		</div>
 	</div>
 </li>
