@@ -20,10 +20,11 @@ class SubmissionsController < ApplicationController
   # GET /submissions/1/edit
   def edit; end
 
+  # Below has not been tested, this fix was covered in lesson 28 - concerns and bugfixes.
   def upvote # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if current_user.voted_for? @submission
-        format.html { redirect_to submission_path(@submission), alert: 'Voted already' }
+        format.html { redirect_back fallback_location: root_path, alert: 'Voted already' }
       else
         @submission.upvote_by current_user
         format.turbo_stream do
@@ -38,7 +39,7 @@ class SubmissionsController < ApplicationController
   def downvote # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if current_user.voted_for? @submission
-        format.html { redirect_to submission_path(@submission), alert: 'U mad?' }
+        format.html { redirect_back fallback_location: root_path, alert: 'U mad?' }
       else
         @submission.downvote_by current_user
         format.turbo_stream do
