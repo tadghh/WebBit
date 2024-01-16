@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
+  include ActionView::RecordIdentifier
+
   before_action :authenticate_user!
-  before_action :set_comment, only: %i[edit update destroy show]
+  before_action :set_comment, only: %i[edit update destroy show upvote downvote]
   before_action :set_submission
 
   def new; end
@@ -31,8 +33,35 @@ class CommentsController < ApplicationController
     end
   end
 
-  def upvote; end
-  def downvote; end
+  def upvote # rubocop:disable Metrics/MethodLength
+    respond_to do |format|
+      if current_user.voted_for? @comment
+        format.html { redirect_to submission_path(@submission), alert: 'Voted already' }
+      else
+        @comment.upvote_by current_user
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("#{dom_id(@comment)}_votes_count",
+                                                    @comment.total_vote_count)
+        end
+
+      end
+    end
+  end
+
+  def downvote # rubocop:disable Metrics/MethodLength
+    respond_to do |format|
+      if current_user.voted_for? @comment
+        format.html { redirect_to submission_path(@comment), alert: 'U mad?' }
+      else
+        @comment.downvote_by current_user
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("#{dom_id(@comment)}_votes_count",
+                                                    @comment.total_vote_count)
+        end
+
+      end
+    end
+  end
 
   def destroy
     @comment.destroy
