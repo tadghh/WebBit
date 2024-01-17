@@ -82,4 +82,6 @@ gem 'ruby-lsp', '~> 0.13.2'
 gem 'htmlbeautifier'
 gem 'rubocop-rails', require: false
 
-gem "acts_as_votable", "~> 0.14.0"
+gem 'acts_as_votable', '~> 0.14.0'
+
+gem 'validate_url'
