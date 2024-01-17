@@ -13,14 +13,14 @@
 		<% end %>
 
 	<%else%>
-		<%= link_to new_user_session_path, class:"block text-center group" do%>
+		<%= link_to new_user_session_path, class:"block text-center group", data: {turbo: false} do%>
 			<%= render_svg "icons/up-vote", styles:"group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4"%>
 		<% end %>
 		<div class="flex justify-center mx-auto">
 			<span id="<%= dom_id(comment) %>_votes_count"class="text-gray-700 text-center block -ml-[5px]"><%= comment.total_vote_count%></span>
 		</div>
 
-		<%= link_to new_user_session_path, class:"block text-center group" do%>
+		<%= link_to new_user_session_path, class:"block text-center group",data: {turbo: false}  do%>
 			<%= render_svg "icons/down-vote", styles:"group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4"%>
 		<% end %>
 	<% end%>
