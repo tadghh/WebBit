@@ -145,6 +145,10 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     language_server-protocol (3.17.0.3)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -349,6 +353,7 @@ DEPENDENCIES
   inline_svg (~> 1.9)
   jbuilder
   jsbundling-rails
+  letter_opener (~> 1.8)
   puma (>= 5.0)
   rails (~> 7.1.2)
   rubocop-rails

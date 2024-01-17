@@ -1,0 +1,6 @@
+<p><%= @submission.user.username %>,</p>
+<p>You post <%= link_to @submission.title, submission_url(@submission)%> has a new comment.</p>
+
+<p>New comment: </p>
+
+<div><%= @comment.reply%></div>
