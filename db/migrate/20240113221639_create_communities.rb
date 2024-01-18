@@ -5,7 +5,7 @@ class CreateCommunities < ActiveRecord::Migration[7.1]
       t.string :title
       t.text :description
       t.text :sidebar
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: false
 
       t.timestamps
     end
