@@ -1,13 +1,81 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <style>
-      /* Email styles need to be inline */
-    </style>
-  </head>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Your Email Subject</title>
+		<style>
+			body {
+			  font-family: 'Arial', sans-serif;
+			  line-height: 1.6;
+			  margin: 0;
+			  padding: 0;
+			  background-color: #f3f3f3;
+			  color: #1a1a1a;
+			}
 
-  <body>
-    <%= yield %>
-  </body>
+			table.container {
+			  width: 100%;
+			  max-width: 600px;
+			  margin: 0 auto;
+			  background-color: #ffffff;
+			  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			  border-radius: 8px;
+			}
+
+			h1 {
+			  color: #0062ff;
+			}
+
+			p {
+			  margin-bottom: 20px;
+			}
+
+			ul {
+			  padding: 0;
+			  list-style: none;
+			}
+
+			li {
+			  margin-bottom: 5px;
+			}
+
+			footer {
+			  margin-top: 20px;
+			  padding-top: 10px;
+			  border-top: 1px solid #ddd;
+			  color: #888;
+			}
+		</style>
+	</head>
+	<body>
+		<table class="container">
+			<tr>
+				<td>
+					<h1>Your Email Subject</h1>
+
+					<p>Hello <strong>TBA</strong>,</p>
+
+					<p>This is an example email template for Ruby on Rails with a design inspired by Monsanto. You can customize it as needed.</p>
+
+					<p>Here are some dynamic content examples:</p>
+
+					<ul>
+						<li>User Name: <strong>TBA</strong></li>
+						<li>User Email: <strong>TBA</strong></li>
+						<!-- Add more dynamic content as needed -->
+					</ul>
+
+					<p><%= yield%></p>
+
+					<p>Thank you for using our application!</p>
+
+					<footer>
+						<p>Best Regards,<br />
+							Your Company Name</p>
+					</footer>
+				</td>
+			</tr>
+		</table>
+	</body>
 </html>
