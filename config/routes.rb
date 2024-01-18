@@ -1,4 +1,7 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+  # /sidekiq page
+  mount Sidekiq::Web => '/sideqkic'
   resources :communities do
     resources :subscriptions
   end
