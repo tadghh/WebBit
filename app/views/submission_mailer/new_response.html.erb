@@ -4,3 +4,6 @@
 <p>New comment: </p>
 
 <div><%= @comment.reply%></div>
+
+<%# Could spam all hashes to unsubscrbe random users %>
+<p><%= link_to "Unsubscribe", comment_unsubscribe_url(@submission.user.unsubscribe_hash), target: :_blank %></p>

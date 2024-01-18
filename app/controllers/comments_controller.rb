@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.turbo_stream
       if @comment.save
-        SubmissionMailer.with(comment: @comment, submission: @submission).new_response.deliver_later
+
         format.html { redirect_to submission_path(@submission), notice: 'Comment posted successfully' }
       else
         format.html { redirect_to submission_path(@submission), alert: 'Comment could not be created' }
@@ -73,6 +73,12 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def send_comment_notification
+    return unless (@submission.user != @comment.user) || !@submission.user.comment_subscription?
+
+    SubmissionMailer.with(comment: @comment, submission: @submission).new_response.deliver_later
+  end
 
   def set_submission
     @submission = Submission.find(params[:submission_id])

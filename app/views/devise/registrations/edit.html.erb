@@ -38,7 +38,16 @@
 			<p  class="text-sm text-gray-600">(we need your current password to confirm your changes)</p>
 
 		</div>
+		<div class="mb-6">
+			<h3 class="mb-2 text-xl font-bold">
+				<div class="flex items-center">
+					<%= f.check_box :comment_subscription, class:"fill-current text-indigo-600 rounded focus:ring-indigo-600" %>
+					<%= f.label :comment_subscription, "Receive replies to comment through email.", class:"mb-0 ml-2 font-normal text-gray-600 normal-case tracking-normal" %>
 
+				</div>
+
+			</h3>
+		</div>
 		<%= f.submit "Update",  class: "btn btn-indigo w-full"%>
 
 	<% end %>
