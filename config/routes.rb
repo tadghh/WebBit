@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
 
   get 'submissions/unsubscribe/:unsubscribe_hash' => 'submissions#unsubscribe', as: :comment_unsubscribe
-
+  get :search, controller: :application
   devise_for :users
   root 'submissions#index'
 

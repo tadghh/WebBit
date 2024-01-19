@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
     @communities = Community.all.order(:title)
   end
 
+  def search
+    # return unless params[:q].present?
+
+    @results - PgSearch.multisearch(params[:q])
+  end
+
   protected
 
   def configure_permitted_parameters

@@ -87,4 +87,5 @@ gem 'acts_as_votable', '~> 0.14.0'
 
 gem 'validate_url'
 
+gem 'pg_search'
 gem 'sidekiq', '~> 7.2'

@@ -1,5 +1,9 @@
 class Submission < ApplicationRecord
   include VotesCountable
+  include PgSearch::Model
+
+  multisearchable against: %i[title body url]
+
   belongs_to :user
   belongs_to :community
   has_one_attached :media
