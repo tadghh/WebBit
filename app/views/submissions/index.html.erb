@@ -3,7 +3,8 @@
 	<% if @submissions.any? %>
 		<div id="submissions">
 			<ul class="list-none divide-y">
-				<% @submissions.each do |submission| %>
+				<% @submissions.each_with_index do |submission, index| %>
+					<%= inject_feed_ad(index)%>
 					<%= render submission%>
 
 				<% end%>

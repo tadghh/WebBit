@@ -3,14 +3,16 @@
 <%= render "header", community: @community%>
 
 <% content_for :primary_content do %>
-	<% @community.submissions.each do |submission| %>
-		<%=  render "submissions/submission", submission: submission %>
-
-	<%end %>
+	<ul class="list-none divide-y">
+		<% @community.submissions.each_with_index do |submission| %>
+			<%= inject_feed_ad(index)%>
+			<%=  render "submissions/submission", submission: submission %>
+		<%end %>
+	</ul>
 <%end %>
 
 <% content_for :secondary_content do%>
 	<%=  render "sidebar", community: @community %>
-
 <% end %>
+
 <%=  render "basic_layout" %>
