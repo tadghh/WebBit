@@ -11,7 +11,7 @@ module ApplicationHelper # rubocop:disable Style/Documentation
   end
 
   def author_of?(resource)
-    user_signed_in? && current_user.id == resource.id
+    user_signed_in? && current_user.id == resource.id || user_signed_in? && current_user.admin?
   end
 
   def nav

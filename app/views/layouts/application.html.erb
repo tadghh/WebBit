@@ -9,6 +9,9 @@
 		<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 	</head>
 	<body class="overflow-x-hidden relative h-screen bg-gray-200 accent-indigo-600">
+
+		<%= render "admin/nav" if params[:controller].include?("admin")%>
+
 		<% flash.each do | type, message| %>
 			<% if type == "alert" %>
 				<div class="bg-red-500" >
@@ -94,6 +97,14 @@
 									<div class="relative">
 
 										<ul class="hidden absolute top-2 -right-4 bg-white rounded rounded-tr-none border border-gray-400 shadow-lg min-w-52" data-dropdown-target="menu">
+											<% if current_user.admin?%>
+												<li>
+													<%= link_to admin_root_path, class:"   dropdown-menu group" do %>
+														<%= render_svg "icons/key", styles: "dropdown-menu-item-pic"%>
+														Admin<% end%>
+												</li>
+											<% end%>
+
 											<li>
 												<%= link_to profile_path(current_user), class:"   dropdown-menu group" do %>
 													<%= render_svg "icons/user", styles: "dropdown-menu-item-pic"%>
