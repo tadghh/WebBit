@@ -48,5 +48,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   resources :profiles, only: :show
 
-  resources :pricing
+  resource :pricing
+  resources :checkouts
+  resources :premium_subscriptions
+  get 'success', to: 'checkouts#success'
 end

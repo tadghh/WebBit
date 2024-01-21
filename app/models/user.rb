@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   has_many :subscribe_submissions, through: :communities,
                                    source: :submissions
+  has_many :premium_subscriptions, dependent: :destroy
 
   acts_as_voter
 
