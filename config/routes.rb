@@ -17,7 +17,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   end
 
   resources :submissions do
-    resources :comments
+    # resources :comments
 
     member do
       put 'upvote', to: 'submisson#upvote'
@@ -47,4 +47,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   root 'submissions#index'
 
   resources :profiles, only: :show
+
+  resources :pricing
 end

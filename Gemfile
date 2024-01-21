@@ -89,3 +89,5 @@ gem 'validate_url'
 
 gem 'pg_search'
 gem 'sidekiq', '~> 7.2'
+
+gem "stripe", "~> 10.6"
