@@ -118,6 +118,8 @@ GEM
     e2mmap (0.1.0)
     erubi (1.12.0)
     ffi (1.16.3)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     htmlbeautifier (1.4.2)
@@ -159,6 +161,8 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
+    meta-tags (2.20.0)
+      actionpack (>= 6.0.0, < 7.2)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.20.0)
@@ -358,12 +362,14 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise (~> 4.9)
+  friendly_id (~> 5.5)
   htmlbeautifier
   image_processing (~> 1.2)
   inline_svg (~> 1.9)
   jbuilder
   jsbundling-rails
   letter_opener (~> 1.8)
+  meta-tags (~> 2.20)
   pg (~> 1.1)
   pg_search
   puma (>= 5.0)

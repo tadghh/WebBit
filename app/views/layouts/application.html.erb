@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Webbit</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<%= csrf_meta_tags %>
 		<%= csp_meta_tag %>
 		<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 		<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 		<%= javascript_include_tag "application","https://js.stripe.com/v3/", "data-turbo-track": "reload" %>
+		<%= favicon_link_tag asset_path("favi/favicon-96x96.png")%>
+		<%= display_meta_tags(
+			site: "Fight and brigade communities",
+			reverse: true,
+			og: {
+				title: :title,
+				type: "website",
+				url: request.original_url,
+				image: [{
+					_: image_url("drdiagnosis.jpg"),
+					width: 1200,
+					height: 630
+				}],
+				site_name: "BrigadeIt",
+				description: "Where one gathers to extinguish, those who are incorrect"
+			},
+			twitter:{
+				card: "photo",
+				image: {
+					_: image_url("drdiagnosis.jpg"),
+					width: 1200,
+					height: 630
+				}
+			},
+			author: 'BreadIt',
+			description: "My metamask was hacked"
+		) %>
 	</head>
 	<body class="overflow-x-hidden relative h-screen bg-gray-200 accent-indigo-600">
 
