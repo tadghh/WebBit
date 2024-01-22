@@ -1,56 +1,103 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+# Data to seed the database with.
+# Includes three communities
+#   - 'Test Community'
+#   - 'Wrench Lovers Community'
+#   - 'Nut Community'
 #
-# Example:
+# And two user accounts (Username, Password)
+#   - U: "testbuddy" P: "password"
+#   - U" "adminbuddy" P: "rootpassword"
 #
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# frozen_string_literal: true
+
 User.create!(
   {
-    email: 'test@email.com',
-    password: 'password',
-    password_confirmation: 'password',
     admin: false,
+    email: 'test@email.com',
+    password_confirmation: 'password',
+    password: 'password',
     username: 'testbuddy'
   }
 )
-#   end
-user_admin = User.create!(
+
+user_wrench = User.create!(
   {
-    email: 'admin@email.com',
-    password: 'rootpassword',
-    password_confirmation: 'rootpassword',
     admin: false,
-    username: 'adminbuddy'
-  }
-)
-community1 = Community.create!(
-  {
-    name: 'TestCommunity',
-    title: 'Test Community',
-    description: 'All things testing',
-    sidebar: 'All things testing sidebar',
-    user_id: user_admin.id
+    email: 'wrench@email.com',
+    password_confirmation: 'wrenches123',
+    password: 'wrenches123',
+    username: 'WrenchFellow'
   }
 )
 
-community2 = Community.create!(
+user_admin = User.create!(
   {
-    name: 'TestCommunity1',
-    title: 'Test Community',
+    admin: true,
+    email: 'admin@email.com',
+    password_confirmation: 'rootpassword',
+    password: 'rootpassword',
+    username: 'adminbuddy'
+  }
+)
+
+# Bland test community
+
+community1 = Community.create!(
+  {
     description: 'All things testing',
+    name: 'TestCommunity',
     sidebar: 'All things testing sidebar',
+    title: 'Test Community',
     user_id: user_admin.id
   }
 )
 
 Submission.create!(
   {
-    title: 'Breaking news Pink man goes crazy',
     body: 'Drops album talking about nicklodian',
     community: community1,
+    title: 'Breaking news Pink man goes crazy',
     user: user_admin
+  }
+)
+
+# Nut Community
+
+community2 = Community.create!(
+  {
+    description: 'All things nutty',
+    name: 'TestNutCommunity',
+    sidebar: 'All things legume like',
+    title: 'Nut Community',
+    user_id: user_admin.id
+  }
+)
+
+submission_nut = Submission.create!(
+  {
+    body: 'Whenever I eat a handful of peanuts my throat get really tight and scratchy. Does this happen for anyone else?', # rubocop:disable Layout/LineLength
+    community: community2,
+    title: 'Anyone having issues when eating nuts?',
+    user: user_admin
+  }
+)
+
+Comment.create(
+  {
+    submission: submission_nut,
+    user: user_wrench,
+    reply: 'Wrenches solve this issue.'
+  }
+)
+
+# Wrench community
+
+Community.create!(
+  {
+    description: 'If you love sockets or spanners this is the place to be',
+    name: 'TestWrenchCommunity',
+    sidebar: 'All things Wrench-y and bendy',
+    title: 'Wrench Lovers Community',
+    user_id: user_wrench.id
   }
 )
