@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Context, allows us to easily call the below methods from mostly anywhere in the application
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :find_communities

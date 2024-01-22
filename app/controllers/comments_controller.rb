@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Methods and comment object behaviour
 class CommentsController < ApplicationController
   include ActionView::RecordIdentifier
 

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Used for billings, creating our stripe session
 class BillingsController < ApplicationController
   before_action :authenticate_user!
 

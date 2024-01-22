@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Communities on the website, behaviour and methods
 class CommunitiesController < ApplicationController
   before_action :set_community, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
@@ -22,7 +25,7 @@ class CommunitiesController < ApplicationController
   def edit; end
 
   # POST /communities or /communities.json
-  def create
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @community = current_user.communities.new(community_params)
     @community.user = current_user
 

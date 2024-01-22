@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# Handles subscriptions of a user to a community
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_community, only: %i[create destroy]
+
   def create # rubocop:disable Metrics/MethodLength
     @subscription = @community.subscriptions.new
     @subscription.community = @community
@@ -8,12 +12,14 @@ class SubscriptionsController < ApplicationController
     respond_to do |format|
       if @subscription.save
         format.turbo_stream
-        format.html { redirect_to community_path(@community), notice: 'You successfully subscribed.' }
+        format.html do
+          redirect_to community_path(@community),
+                      notice: 'You have successfully subscribed.'
+        end
       else
         format.html do
           redirect_to community_path(@community), alert: 'Something went ary subscribing to the community.'
         end
-
       end
     end
   end

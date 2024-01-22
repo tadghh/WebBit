@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Creates our checkout session with stripe
 class CheckoutsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 

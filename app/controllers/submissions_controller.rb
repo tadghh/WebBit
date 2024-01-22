@@ -1,4 +1,7 @@
-class SubmissionsController < ApplicationController
+# frozen_string_literal: true
+
+# Handles behaviours relating to a submission
+class SubmissionsController < ApplicationController # rubocop:disable Metrics/ClassLength
   include ActionView::RecordIdentifier
 
   before_action :set_submission, only: %i[show edit update destroy upvote downvote]
@@ -34,14 +37,18 @@ class SubmissionsController < ApplicationController
   def upvote # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if current_user.voted_for? @submission
-        format.html { redirect_back fallback_location: root_path, alert: 'Voted already' }
+        format.html do
+          redirect_back fallback_location: root_path,
+                        alert: 'Voted already'
+        end
       else
         @submission.upvote_by current_user
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("#{dom_id(@submission)}_votes_count",
-                                                    @submission.total_vote_count)
+          render turbo_stream: turbo_stream.replace(
+            "#{dom_id(@submission)}_votes_count",
+            @submission.total_vote_count
+          )
         end
-
       end
     end
   end
@@ -49,14 +56,18 @@ class SubmissionsController < ApplicationController
   def downvote # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if current_user.voted_for? @submission
-        format.html { redirect_back fallback_location: root_path, alert: 'U mad?' }
+        format.html do
+          redirect_back fallback_location: root_path,
+                        alert: 'U mad?'
+        end
       else
         @submission.downvote_by current_user
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("#{dom_id(@submission)}_votes_count",
-                                                    @submission.total_vote_count)
+          render turbo_stream: turbo_stream.replace(
+            "#{dom_id(@submission)}_votes_count",
+            @submission.total_vote_count
+          )
         end
-
       end
     end
   end
@@ -67,30 +78,56 @@ class SubmissionsController < ApplicationController
   end
 
   # POST /submissions or /submissions.json
-  def create
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @submission = Submission.new(submission_params)
     @submission.user_id = current_user.id
 
     respond_to do |format|
       if @submission.save
-        format.html { redirect_to submission_url(@submission), notice: 'Submission was successfully created.' }
-        format.json { render :show, status: :created, location: @submission }
+        format.html do
+          redirect_to submission_url(@submission),
+                      notice: 'Submission was successfully created.'
+        end
+        format.json do
+          render :show,
+                 status: :created,
+                 location: @submission
+        end
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
+        format.html do
+          render :new,
+                 status: :unprocessable_entity
+        end
+        format.json do
+          render json: @submission.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
 
   # PATCH/PUT /submissions/1 or /submissions/1.json
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if @submission.update(submission_params)
-        format.html { redirect_to submission_url(@submission), notice: 'Submission was successfully updated.' }
-        format.json { render :show, status: :ok, location: @submission }
+        format.html do
+          redirect_to submission_url(@submission),
+                      notice: 'Submission was successfully updated.'
+        end
+        format.json do
+          ender :show,
+                status: :ok,
+                location: @submission
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
+        format.html do
+          render :edit,
+                 status: :unprocessable_entity
+        end
+        format.json do
+          render json: @submission.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -100,8 +137,13 @@ class SubmissionsController < ApplicationController
     @submission.destroy!
 
     respond_to do |format|
-      format.html { redirect_to submissions_url, notice: 'Submission was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html do
+        redirect_to submissions_url,
+                    notice: 'Submission was successfully destroyed.'
+      end
+      format.json do
+        head :no_content
+      end
     end
   end
 
