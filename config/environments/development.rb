@@ -73,6 +73,6 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
-  config.action_controller.delivery_method = :letter_opener
-  config.action_controller.perform_deliveries = true
+  # config.action_controller.delivery_method = :letter_opener
+  # config.action_controller.perform_deliveries = true
 end

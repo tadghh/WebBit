@@ -36,7 +36,7 @@
 			<div class="flex flex-wrap items-center">
 				<div class="flex-1 justify-between mt-3">
 					<%= link_to submission_path(submission, anchor:"post_comment_section"), class:"flex items-center space-x-3 group" do %>
-						<%= render "icons/conversation", styles:" group-hover:text-indigo-600 text-gray-500 w-4 h-4 fill-current"%>
+						<%= render_svg "icons/conversation", styles:" group-hover:text-indigo-600 text-gray-500 w-4 h-4 fill-current"%>
 						<p class="group-hover:text-indigo-600">
 							<%= pluralize(submission.comments.size, 'comment')%>
 						</p>

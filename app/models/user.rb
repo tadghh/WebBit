@@ -16,8 +16,8 @@ class User < ApplicationRecord
   validates_uniqueness_of :username
   validates_presence_of :username
 
-  has_many :subscribe_submissions, through: :communities,
-                                   source: :submissions
+  has_many :subscribed_submissions, through: :communities,
+                                    source: :submissions
   has_many :premium_subscriptions, dependent: :destroy
 
   acts_as_voter

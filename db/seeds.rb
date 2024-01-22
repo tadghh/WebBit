@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-user = User.create!(
+User.create!(
   {
     email: 'test@email.com',
     password: 'password',
@@ -29,6 +29,16 @@ user_admin = User.create!(
 community1 = Community.create!(
   {
     name: 'TestCommunity',
+    title: 'Test Community',
+    description: 'All things testing',
+    sidebar: 'All things testing sidebar',
+    user_id: user_admin.id
+  }
+)
+
+community2 = Community.create!(
+  {
+    name: 'TestCommunity1',
     title: 'Test Community',
     description: 'All things testing',
     sidebar: 'All things testing sidebar',
