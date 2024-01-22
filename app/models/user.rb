@@ -20,6 +20,10 @@ class User < ApplicationRecord
 
   acts_as_voter
 
+  def subscribed?
+    premium_subscriptions.where(status: 'active').any?
+  end
+
   private
 
   def add_unsubscribe_hash

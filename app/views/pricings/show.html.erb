@@ -5,5 +5,11 @@
 
 	<h1 class="mb-2 text-3xl font-black">Send funds plz</h1>
 	<p class="mb-6">Text about your purchase</p>
-	<%= button_to "Subscribe",checkouts_path,data: {turbo:false},class:"px-3 py-4 bg-indigo-600 text-white w-full text-center rounded"%>
+	<% if user_signed_in? && current_user.subscribed?%>
+		<div class="block p-6 text-center bg-indigo-50 rounded">
+			You already have a subscription, feel free to support the site by sharing it with your friends.
+		</div>
+	<%else%>
+		<%= button_to "Subscribe",checkouts_path,data: {turbo:false},class:"px-3 py-4 bg-indigo-600 text-white w-full text-center rounded"%>
+	<%end%>
 </div>

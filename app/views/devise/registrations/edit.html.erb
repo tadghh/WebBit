@@ -51,6 +51,16 @@
 		<%= f.submit "Update",  class: "btn btn-indigo w-full"%>
 
 	<% end %>
+	<div class="my-6">
+		<h3 class="mb-2 text-lg font-bold">
+			Webbit Premium
+		</h3>
+		<% if user_signed_in? && !current_user.subscribed?%>
+			<%= button_to "Subscribe",checkouts_path,data: {turbo:false},class:"px-3 py-4 bg-indigo-600 text-white w-full text-center rounded"%>
+		<% else%>
+			<%= button_to "Manage subscription",billings_path,data: {turbo:false},class:"px-3 py-4 bg-gray-600 text-white w-full text-center rounded"%>
+		<% end%>
+	</div>
 	<hr class="my-6">
 	<h3 class="mb-3 text-2xl font-bold">Cancel my account</h3>
 

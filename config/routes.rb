@@ -52,4 +52,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   resources :checkouts
   resources :premium_subscriptions
   get 'success', to: 'checkouts#success'
+  resources :webhooks, only: :create
+  resources :billings, only: :create
 end
