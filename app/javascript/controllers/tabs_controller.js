@@ -10,13 +10,13 @@ export default class extends Controller {
 		event.preventDefault();
 		let interactedEvent = event.target.dataset.tabId;
 
-		let coolItem = [
+		let submissionStyle = [
 			{ key: "text", value: this.textTarget.classList },
 			{ key: "media", value: this.mediaTarget.classList },
 			{ key: "url", value: this.urlTarget.classList },
 		];
 
-		coolItem.forEach(({ key, value }) => {
+		submissionStyle.forEach(({ key, value }) => {
 			if (interactedEvent === key) {
 				value.remove("hidden");
 			} else {
@@ -24,16 +24,6 @@ export default class extends Controller {
 			}
 		});
 		this._showActiveTab(interactedEvent);
-		// Below is a less spacious incomplete implementatin
-		// if (interactedEvent == "text") {
-		// 	this.textTarget.classList.remove("hidden");
-		// 	this.urlTarget.classList.remove("hidden");
-		// 	this.mediaTarget.classList.remove("hidden");
-		// } else if (interactedEvent == "url") {
-		// 	this.textTarget.classList.remove("hidden");
-		// 	this.urlTarget.classList.remove("hidden");
-		// 	this.mediaTarget.classList.remove("hidden");
-		// }
 	}
 	_showActiveTab(tabId) {
 		this.buttonTargets.forEach((btn) => {
