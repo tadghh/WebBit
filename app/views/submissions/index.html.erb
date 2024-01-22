@@ -5,7 +5,7 @@
 		<div id="submissions">
 			<ul class="list-none divide-y">
 				<% @submissions.each_with_index do |submission, index| %>
-					<%= inject_feed_ad(index)%>
+					<%= inject_feed_ad(index) %>
 					<%= render submission%>
 
 				<% end%>
