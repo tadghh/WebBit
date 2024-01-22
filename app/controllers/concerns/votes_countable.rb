@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 require 'active_support/concern'
+
+# Used for keeping track of the votes on a post/submission/comment
 module VotesCountable
   extend ActiveSupport::Concern
   included do
