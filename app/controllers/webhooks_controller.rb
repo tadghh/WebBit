@@ -1,6 +1,6 @@
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
-  def create # rubocop:disable Metrics/MethodLength,Metrics/AbcSize,Metrics/CyclomaticComplexity
+  def create # rubocop:disable Metrics/MethodLength,Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
     payload = request.body.read
     signature_header = request.env['HTTP_STRIPE_SIGNATURE']
     endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_signing_secret)
@@ -39,6 +39,21 @@ class WebhooksController < ApplicationController
       if user.exists?
         PremiumSubscriptionMailer.with(user:)
         payment_failed.deliver_now
+      end
+    when 'customer.subscription.update'
+      stripe_subscription = event.data.object
+      if stripe_subscription.cancel_at_period_end == true
+        premium_subscription = Subscription.find_by(subscription_id: stripe_subscription)
+
+        if premium_subscription.present?
+          premium_subscription.update(
+            current_period_start: Time.at(stripe_subscription.current_period_start).to_datetime,
+            current_period_end: Time.at(stripe_subscription.current_period_end).to_datetime,
+            plan: stripe_subscription.plan.id,
+            interval: stripe_subscription.plan.interval,
+            status: stripe_subscription.status
+          )
+        end
       end
     else
       puts "Unhandled stripe event type: #{event.type}"
