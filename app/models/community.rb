@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Represent a community, communities are centered around one topic and have submissions related to that topic
 class Community < ApplicationRecord
   extend FriendlyId
   include PgSearch::Model

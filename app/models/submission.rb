@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# This represents a submission to a community, making sure the submission is valid.
 class Submission < ApplicationRecord
   extend FriendlyId
   include VotesCountable

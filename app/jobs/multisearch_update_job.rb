@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Multisearch, this file specifies models that have searchable content
 class MultisearchUpdateJob < ApplicationJob
   queue_as :default
 

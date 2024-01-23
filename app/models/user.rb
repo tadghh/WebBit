@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Represents a user of the website, along with their relationship to other objects
 class User < ApplicationRecord
   extend FriendlyId
 
