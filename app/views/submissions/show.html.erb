@@ -8,7 +8,7 @@
 		<%= render "voting", submission: @submission %>
 		<div class="flex-1">
 			<p class="text-sm text-gray-600">Posted By: <%= link_to @submission.user.username, profile_path(@submission.user), class:"underline"%> <%= time_ago_in_words(@submission.created_at) + " ago" %></p>
-			<h1 class="mb-6 text-3xl font-bold"> <%= @submission.title%></h1>
+			<h1 class="mb-6 text-3xl font-bold"><%= @submission.title%></h1>
 
 			<% if @submission.media.attached?%>
 				<% if @submission.media.video?%>
@@ -35,7 +35,6 @@
 					</p>
 				</div>
 				<% if author_of?(@submission) %>
-
 					<%= link_to  edit_submission_path(@submission), class:"group" do%>
 						<span class="sr-only">Edit this submission</span>
 						<%= render_svg "icons/edit", styles: "w-5 fill-current group-hover:text-indigo-600 text-gray-500"%>
@@ -47,7 +46,6 @@
 				<% end %>
 			</div>
 		</div>
-
 	</div>
 	<div class="pt-6 mt-6 border-t border-gray-300">
 
@@ -64,16 +62,14 @@
 		<h3 id="post_comment_section"class="mt-6 font-bold">Comments</h3>
 		<div id="<%= dom_id(@submission)%>_comments_form">
 			<%= if @submission.comments.any? %>
-
 				<%= render @submission.comments %>
 			<%end %>
 		</div>
-
 	</div>
 <%end%>
 
 <%= content_for :secondary_content do %>
 	<%= render "communities/sidebar", community: @submission.community%>
-
 <%end%>
+
 <%= render "basic_layout"%>

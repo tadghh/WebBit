@@ -3,8 +3,8 @@
 <% content_for :primary_content do %>
 	<h1 class="mb-6 text-3xl font-bold">Create a community</h1>
 	<%=  render "form", community: @community %>
-
 <%end %>
+
 <% content_for :secondary_content do%>
 	<div class="p-4">
 		<%= render_svg "community", styles: "max-w-full h-auto mb-4"%>
@@ -16,6 +16,6 @@
 			<li>Description</li>
 		</ul>
 	</div>
-
 <% end %>
+
 <%=  render "basic_layout" %>

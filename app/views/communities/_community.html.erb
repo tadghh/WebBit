@@ -8,11 +8,9 @@
 	<div class="mb-4 prose prose-indgo"> <%= truncate(community.description, length: 140)%></div>
 	<p class="text-xs text-gray-500">
 		<%= community.updated_at.to_formatted_s(:nice)%>
-
 	</p>
 	<% if author_of?(community) %>
 		<div class="flex items-center mt-6 space-x-3">
-
 			<%= link_to edit_community_path(community), class:" btn btn-outline inline-flex items-center text-gray-600 text-sm" do%>
 				<%= render_svg "icons/edit", styles:"w-4 h-4 fill-current text-gray-500 mr-2"%>
 				Edit
@@ -21,8 +19,6 @@
 				<%= render_svg "icons/delete", styles:"w-4 h-4 group-hover:text-red-600 mr-2 fill-current text-gray-500",  method: :delete, data: {confirm: "Delete this post?", turbo_method: :delete }%>
 				Delete
 			<% end%>
-
 		</div>
-
 	<% end%>
 </li>

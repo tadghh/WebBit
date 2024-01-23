@@ -24,11 +24,10 @@
 			<%= render "profiles/comment", comment: comment%>
 		<%end%>
 	</ul>
-
 <%end%>
+
 <% content_for :secondary_content do%>
 	<div class="text-center">
-
 		<div class="flex justify-center items-center">
 
 			<%= gravatar_for(@profile, class: "rounded-full w-20 h-20")%>
@@ -37,7 +36,6 @@
 		<p class="font-extralight text-gray-800">Joined <%= @profile.created_at.to_formatted_string(:nice)%></p>
 
 		<div class="mt-6">
-
 			<% if user_signed_up? %>
 				<%= link_to "New submission", new_submission_path, class:"btn btn-indigo block w-full"%>
 
@@ -46,8 +44,6 @@
 				<%= link_to "Sign up", new_user_registration_path, class:"btn btn-indigo block w-full"%>
 			<%end%>
 		</div>
-
 	</div>
-
 <%end%>
 <%= render "basic_layout"%>

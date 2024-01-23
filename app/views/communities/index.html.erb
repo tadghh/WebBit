@@ -2,34 +2,28 @@
 <% content_for :community_label, "All communities"%>
 
 <% content_for :primary_content do %>
-
 	<% if @communities.any? %>
 		<h1 class="mb-6 text-3xl font-bol">Communities</h1>
 		<div id="communities">
 			<ul class="list-none divide-y">
 				<% @communities.each do |community| %>
 					<%= render community%>
-
 				<% end%>
 			</ul>
-
 		</div>
 	<% else %>
 		<div class="p-10 text-center">
 			<div class="flex justify-center list-none">
-
 				<%= render_svg "icons/empty" %>
-
 			</div>
 			<p class="mb-5">No communities have gathered</p>
 			<%= link_to "Create a new community", new_community_path, class: "btn btn-indigo"%>
 		</div>
 	<%end %>
-
 <%end %>
+
 <% content_for :secondary_content do%>
-
 	<%= link_to "New community", new_community_path, class:"btn btn-indigo " %>
-
 <% end %>
+
 <%=  render "basic_layout" %>

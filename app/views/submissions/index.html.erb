@@ -10,27 +10,24 @@
 
 				<% end%>
 			</ul>
-
 		</div>
 	<% else %>
 		<div class="p-10 text-center">
 			<div class="flex justify-center list-none">
-
 				<%= render_svg "icons/empty" %>
-
 			</div>
 			<p class="mb-5">No submissions have been made :'(</p>
 			<%= link_to "Create a new post", new_submission_path, class: "btn btn-indigo"%>
 		</div>
 	<% end %>
 <% end %>
+
 <% content_for :secondary_content do%>
 	<div class="flex flex-col p-4">
 		<% if user_signed_in? %>
 			<h3 class="text-lg font-bold">Welcome, <%= current_user.username%> </h3>
-			<%= link_to "New submission", new_submission_path, class:"btn btn-indigo " %>
+			<%= link_to "New submission", new_submission_path, class:"btn btn-indigo" %>
 			<div class="py-2 grow">
-
 			</div>
 			<%= link_to "New community", new_community_path, class:"btn btn-outline" %>
 		<% else%>
@@ -44,8 +41,7 @@
 			</p>
 			<%= link_to "#", class:" btn btn-indigo my-2 block text-center"%>
 		<% end%>
-
 	</div>
-
 <% end %>
+
 <%=  render "basic_layout" %>

@@ -17,7 +17,6 @@
 		<div class="flex-1 <%= "pl-4" if submission.media.attached?  %>">
 			<h3 class="flex flex-wrap items-center mb-1 text-xl font-semibold hover:text-indigo-600">
 				<%= link_to submission.title, submission, class: "no-underline"%>
-
 				<% if submission.url? %>
 					<span class= "pl-2 font-mono text-xs font-normal tracking-tighter text-indigo-400">
 						<%= truncate(submission.url, length: 18 ) %>
@@ -26,7 +25,6 @@
 			</h3>
 			<p class="mb-2 font-mono text-sm text-gray-600 group hover:text-indigo-600">
 				w/<%= link_to submission.community.name, community_path(submission.community), class:"group-hover:text-indigo-600"%>
-
 			</p>
 			<% if submission.body? %>
 				<div class="text-sm text-gray-900">
@@ -54,9 +52,7 @@
 						<% end%>
 					</div>
 				<% end%>
-
 			</div>
-
 		</div>
 	</div>
 </li>
