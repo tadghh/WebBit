@@ -1,4 +1,4 @@
-<div class="flex flex-col items-start w-10">
+<div class="flex flex-col items-center w-10">
 	<%= user_signed_in? ?
   	(button_to upvote_submission_comment_path(submission, comment),
 	method: :put,
@@ -9,7 +9,7 @@
 	data: { turbo: false })
 	{ render_svg("icons/up-vote", styles: "group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4") }
 	%>
-	<div class="flex justify-center mx-auto">
+	<div class="flex justify-center">
 		<span id="<%= dom_id(comment) %>_votes_count" class="text-gray-700 text-center block -ml-[5px]"><%= comment.total_vote_count %></span>
 	</div>
 	<%= user_signed_in? ?

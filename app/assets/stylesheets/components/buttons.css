@@ -27,3 +27,15 @@
 .dropdown-menu-item-pic {
 	@apply mr-3 w-4 h-4 text-gray-500 fill-current group-hover:text-indigo-600;
 }
+
+.btn-voting {
+	@apply block text-center;
+}
+
+.btn-voting-icon {
+	@apply w-4 h-4 text-gray-500 fill-current group-hover:text-indigo-600;
+}
+
+.btn-voting-count {
+	@apply block text-center text-gray-700;
+}

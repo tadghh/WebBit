@@ -1,25 +1,18 @@
 <div class="flex flex-col items-start w-10">
-	<% if user_signed_in? %>
-		<%= button_to upvote_submission_path(submission),method: :put, class:"block text-center group" do%>
-			<%= render_svg "icons/up-vote", styles:"fill-current text-gray-500 w-4 h-4 group-hover:text-indigo-600 "%>
-		<% end %>
-		<div class="flex justify-center mx-auto">
-			<span id="<%= dom_id(submission) %>_votes_count"class="text-gray-700 text-center block -ml-[5px]"><%= submission.total_vote_count%></span>
-		</div>
+	<%=  user_signed_in?  ?
+    button_to(upvote_submission_path(submission), method: :put, class: "btn-voting group") do
+      render_svg("icons/up-vote", styles: "btn-voting-icon") +
+      content_tag(:div, submission.total_vote_count, id: "#{dom_id(submission)}_votes_count", class: "btn-voting-count ")
+    end +
+    button_to(downvote_submission_path(submission), method: :put, class: "btn-voting group") do
+      render_svg("icons/down-vote", styles: "btn-voting-icon")
+    end
+  :
+    link_to(new_user_session_path, class: "btn-voting group") do
+      render_svg("icons/up-vote", styles: "btn-voting-icon") +
+      content_tag(:div, submission.total_vote_count, id: "#{dom_id(submission)}_votes_count", class: "btn-voting-count  ") +
+	  link_to(new_user_session_path, class: "btn-voting group") { render_svg("icons/down-vote", styles: "btn-voting-icon") }
+    end
+%>
 
-		<%= button_to downvote_submission_path(submission), method: :put, class:"block text-center group" do%>
-			<%= render_svg "icons/down-vote", styles:"fill-current text-gray-500 w-4 h-4 group-hover:text-indigo-600 "%>
-		<% end %>
-	<%else%>
-		<%= link_to new_user_session_path, class:"block text-center group" do%>
-			<%= render_svg "icons/up-vote", styles:"fill-current text-gray-500 w-4 h-4 group-hover:text-indigo-600 "%>
-		<% end %>
-		<div class="flex justify-center mx-auto">
-			<span id="<%= dom_id(submission) %>_votes_count" class="text-gray-700 text-center block -ml-[5px] group"><%= submission.total_vote_count%></span>
-		</div>
-
-		<%= link_to new_user_session_path, class:"block text-center" do%>
-			<%= render_svg "icons/down-vote", styles:"fill-current text-gray-500 w-4 h-4 group-hover:text-indigo-600 "%>
-		<% end %>
-	<% end%>
 </div>

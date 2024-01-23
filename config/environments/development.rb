@@ -32,7 +32,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
     config.cache_store = :null_store
   end
-
+  config.serve_static_assets = false
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
