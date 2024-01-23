@@ -18,13 +18,13 @@
 				<%end%>
 			<%end%>
 
-			<%= if @submission.body? %>
+			<% if @submission.body? %>
 				<div class="prose prose-lg prose-indigo">
 					<%= simple_format @submission.body%>
 				</div>
 			<% end%>
 
-			<%= if @submission.url?%>
+			<% if @submission.url?%>
 				<%= link_to truncate(@submission.url, length:100), @submission.url, class:"font-mono text-indigo-500 hover:underline", target: :_blank%>
 			<% end%>
 			<div class="flex items-center mt-6 space-x-5">
@@ -49,7 +49,7 @@
 	</div>
 	<div class="pt-6 mt-6 border-t border-gray-300">
 
-		<%= if user_signed_in?%>
+		<% if user_signed_in?%>
 			<div id="<%= dom_id(@submission)%>_comments">
 				<%= render "comments/form", comment: Comment.new%>
 			</div>
@@ -61,7 +61,7 @@
 		<%# Add no comments made fluff %>
 		<h3 id="post_comment_section"class="mt-6 font-bold">Comments</h3>
 		<div id="<%= dom_id(@submission)%>_comments_form">
-			<%= if @submission.comments.any? %>
+			<% if @submission.comments.any? %>
 				<%= render @submission.comments %>
 			<%end %>
 		</div>
