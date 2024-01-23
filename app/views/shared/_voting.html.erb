@@ -1,0 +1,17 @@
+<div class="flex flex-col items-start w-10">
+	<%=  user_signed_in?  ?
+		button_to(upvote, method: :put, class: "btn-voting group") do
+		render_svg("icons/up-vote", styles: "btn-voting-icon") +
+		content_tag(:div, content.total_vote_count, id: "#{dom_id(content)}_votes_count", class: "btn-voting-count ")
+		end +
+		button_to(downvote, method: :put, class: "btn-voting group") do
+		render_svg("icons/down-vote", styles: "btn-voting-icon")
+		end
+	:
+		link_to(new_user_session_path, class: "btn-voting group") do
+		render_svg("icons/up-vote", styles: "btn-voting-icon") +
+		content_tag(:div, content.total_vote_count, id: "#{dom_id(content)}_votes_count", class: "btn-voting-count  ") +
+		link_to(new_user_session_path, class: "btn-voting group") { render_svg("icons/down-vote", styles: "btn-voting-icon") }
+		end
+	%>
+</div>

@@ -1,18 +1,3 @@
 <div class="flex flex-col items-start w-10">
-	<%=  user_signed_in?  ?
-    button_to(upvote_submission_path(submission), method: :put, class: "btn-voting group") do
-      render_svg("icons/up-vote", styles: "btn-voting-icon") +
-      content_tag(:div, submission.total_vote_count, id: "#{dom_id(submission)}_votes_count", class: "btn-voting-count ")
-    end +
-    button_to(downvote_submission_path(submission), method: :put, class: "btn-voting group") do
-      render_svg("icons/down-vote", styles: "btn-voting-icon")
-    end
-  :
-    link_to(new_user_session_path, class: "btn-voting group") do
-      render_svg("icons/up-vote", styles: "btn-voting-icon") +
-      content_tag(:div, submission.total_vote_count, id: "#{dom_id(submission)}_votes_count", class: "btn-voting-count  ") +
-	  link_to(new_user_session_path, class: "btn-voting group") { render_svg("icons/down-vote", styles: "btn-voting-icon") }
-    end
-%>
-
+	<%= render "shared/voting" , is_comment: false, content: submission, upvote: upvote_submission_path(submission), downvote: downvote_submission_path(submission) %>
 </div>
