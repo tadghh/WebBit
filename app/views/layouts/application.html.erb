@@ -59,24 +59,28 @@
 		<nav class="py-2 bg-white border-b border-gray-400" role="navigation" aria-label="main navigation">
 			<div class="flex flex-col flex-wrap justify-center items-center px-4 py-3 lg:flex-row lg:justify-start lg:content-center lg:px-6 lg:py-0 lg:space-x-3" >
 				<%= link_to root_path, class: "leading-normal no-underline text-gray-800 my-2  hover:text-purple-600" do %>
-					<h1 class="pr-2 text-lg font-semibold uppercase"> Webbit</h1>
+					<h1 class="pr-2 text-lg font-semibold uppercase">Webbit</h1>
 				<% end %>
 				<div class="flex flex-col flex-wrap flex-1 justify-start w-full lg:flex-row">
 					<div class="flex flex-wrap flex-1 items-center space-x-6">
 						<div class="w-1/3">
 							<% if @communities.any? %>
-								<div data-controller="dropdown" class="relative ml-1 text-gray-700 bg-white hover:bg-gray-50">
-									<%= link_to "#", class: "border no-underline flex items-center justify-between text-gray-700 py-2 px-3 rounded border-gray-400", data: { action: "click->dropdown#toggle click@window->dropdown#hide "} do %>
+								<div data-controller="dropdown" class="relative z-10 ml-1 text-gray-700 bg-white hover:bg-gray-50">
+									<%= link_to "#",
+									 class: "border no-underline flex items-center justify-between text-gray-700 py-2 px-3 rounded border-gray-400",
+									 data: {
+										 	action: "click->dropdown#toggle click@window->dropdown#hide"
+										 } do %>
 										<span class="text-sm font-semibold">
 											<%= content_for?(:community_label) ?
 											"#{(action_name != "edit" && action_name != "new" && action_name != "index" ? "w/" : "")}#{yield(:community_label)}" :
 											"Select a community" %>
 										</span>
 										<div class="flex absolute right-2 inset-y-5 items-center pointer-events-none">
-											<%= render_svg "icons/chevron-down", styles: "fill-current w-4 h-4 text-gray-500" %>
+											<%= render_svg "icons/chevron-down", styles: "navigation-icon" %>
 										</div>
 									<% end %>
-									<ul class="hidden absolute left-0 top-9 rounded-b border border-gray-400 divide-y shadow-lg bg-inherit min-w-56" data-dropdown-target="menu">
+									<ul class="hidden absolute left-0 top-9 rounded border border-t-0 border-gray-400 divide-y shadow-lg -z-10 bg-inherit min-w-56" data-dropdown-target="menu">
 										<% @communities.each do |community| %>
 											<li>
 												<%= link_to community, class:"bg-inherit rounded  dropdown-menu group " do %>
@@ -107,7 +111,7 @@
 							<div class="mr-3">
 								<% if user_signed_in? %>
 									<%= link_to new_submission_path, class: "hover:text-indigo-600 hover:bg-indigo-50  fill-current text-gray-600 rounded-md block p-2" do %>
-										<%= render_svg "icons/create", styles: "", title: "Create submission" %>
+										<%= render_svg "icons/create", styles: "navigation-icon stroke-none", title: "Create submission" %>
 									<% end %>
 								<% else %>
 									<%= link_to "Login", new_user_session_path, class: "btn btn-small btn-outline mr-2" %>
@@ -117,12 +121,15 @@
 							<% if user_signed_in? %>
 								<div data-controller="dropdown" class="relative px-3 py-2 pr-4 mx-auto ml-1 text-gray-600 bg-white rounded border border-gray-400 hover:bg-gray-200">
 
-									<%= link_to "#", class: " no-underline flex justify-between text-sm tracking-wide items-center font-semibold", data: {action: "click->dropdown#toggle  click@window->dropdown#hide"} do %>
+									<%= link_to "#",
+									 class: "no-underline flex justify-between text-sm tracking-wide items-center font-semibold",
+									 data: {
+											action: "click->dropdown#toggle click@window->dropdown#hide"
+										} do %>
 										<%= current_user.username ||= current_user.email%>
-										<%= render_svg "icons/chevron-down", styles: "ml-2 w-4 h-4" %>
+										<%= render_svg "icons/chevron-down", styles: "ml-2 navigation-icon" %>
 									<% end %>
 									<div class="relative">
-
 										<ul class="hidden absolute top-2 -right-4 bg-white rounded rounded-tr-none border border-gray-400 shadow-lg min-w-52" data-dropdown-target="menu">
 											<% if current_user.admin?%>
 												<li>
