@@ -33,7 +33,9 @@
 					<p id="<%= dom_id(@submission)%>_comment_count">
 						<%= pluralize(@submission.comments.size, ' comment')%>
 					</p>
+
 				</div>
+
 				<% if author_of?(@submission) %>
 					<%= link_to  edit_submission_path(@submission), class:"group" do%>
 						<span class="sr-only">Edit this submission</span>

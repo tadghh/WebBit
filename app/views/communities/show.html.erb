@@ -7,13 +7,13 @@
 	<ul class="list-none divide-y">
 		<% @community.submissions.each_with_index do |submission,index| %>
 			<%= inject_feed_ad(index) %>
-			<%=  render "submissions/submission", submission: submission %>
-		<%end %>
+			<%= render "submissions/submission", submission: submission %>
+		<% end %>
 	</ul>
-<%end %>
-
-<% content_for :secondary_content do%>
-	<%=  render "sidebar", community: @community %>
 <% end %>
 
-<%=  render "basic_layout" %>
+<% content_for :secondary_content do%>
+	<%= render "sidebar", community: @community %>
+<% end %>
+
+<%= render "basic_layout" %>

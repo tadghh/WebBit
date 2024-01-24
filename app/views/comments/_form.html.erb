@@ -1,4 +1,5 @@
-<p class="my-2 text-sm text-gray-600"> Comment as <%= link_to current_user.username, profile_path(current_user),  class:"text-indigo-600 underline"%></p>
+<p class="my-2 text-sm text-gray-600">Comment as <%= link_to current_user.username, profile_path(current_user),  class:"text-indigo-600 underline"%>
+</p>
 <%= form_with(model:[@submission, comment]) do |f| %>
 	<%= f.text_area :reply, class: "input min-h-[100px] resize-none", placeholder: "thoughts?"%>
 	<%= f.submit class: "btn btn-indigo text-base font-normal mt-6"%>
