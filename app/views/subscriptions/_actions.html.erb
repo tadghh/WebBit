@@ -1,5 +1,5 @@
 	<%# todo: excluded log in, let the user find the confines of their room/session. freedom, "hey look at all these things you cant do" doesnt open a dialog eg "to much work..." %>
-<%= if user.communities.include? @community%>
+<% if user.communities.include? @community%>
 	<%= button_to "Unsubscribe", community_subscriptions_path(@community), method: :delete, class:"btn btn-outline mx-auto"%>
 <% else%>
 	<%= button_to "Subscribe", community_subscriptions_path(@community), method: :post, class:"btn btn-indigo mx-auto"%>
