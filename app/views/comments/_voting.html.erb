@@ -1,35 +1,5 @@
 <div class="flex flex-col items-center w-10">
-	<%= user_signed_in? ?
-  	(button_to upvote_submission_comment_path(submission, comment),
-	method: :put,
-	class: "block text-center group")
-	{ render_svg("icons/up-vote", styles: "group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4") } :
-  	(link_to new_user_session_path,
-	class: "block text-center group",
-	data: { turbo: false })
-	{ render_svg("icons/up-vote", styles: "group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4") }
-	%>
-	<div class="flex justify-center">
-		<span id="<%= dom_id(comment) %>_votes_count" class="text-gray-700 text-center block -ml-[5px]"><%= comment.total_vote_count %></span>
-	</div>
-	<%= user_signed_in? ?
-  	(button_to downvote_submission_comment_path(submission, comment),
-	method: :put,
-	class: "block text-center group")
-	{ render_svg("icons/down-vote", styles: "group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4") } :
-  	(link_to new_user_session_path,
-	class: "block text-center group",
-	data: { turbo: false })
-	{ render_svg("icons/down-vote", styles: "group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4") }
-	%>
 
-	<% if false%>
-		<%= user_signed_in ? button_to(upvote_submission_comment_path(submission, comment),
-			method: :put,
-			class: "block text-center group") { render_svg("icons/up-vote", styles: "group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4") }:
-			link_to(new_user_session_path,
-			data: {turbo: false},
-			class: "block text-center group") { render_svg("icons/up-vote", styles: "group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4") } %>
-		<%= render_svg "icons/up-vote", styles:"group-hover:text-indigo-600 fill-current text-gray-500 w-4 h-4"%>
-	<% end %>
+	<%= render "shared/voting" , is_comment: true, content: comment, upvote: upvote_submission_comment_path(submission, comment), downvote: downvote_submission_comment_path(submission, comment) %>
+
 </div>
