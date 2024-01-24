@@ -10,3 +10,17 @@ label {
 .select {
 	@apply block px-4 py-3 w-full leading-tight text-gray-700 bg-gray-100 rounded border border-gray-300 ring ring-transparent appearance-none focus:ring-indigo-50 focus:outline-none focus:bg-white focus:border-indigo-600 focus:ring-4;
 }
+.search-container {
+	@apply flex max-h-[38px] flex-row bg-gray-100 rounded border border-gray-300;
+}
+
+.search-input {
+	@apply px-0 py-2 rounded border-none focus:ring-0 focus:ring-offset-0 bg-inherit grow;
+}
+.search-icon {
+	@apply flex inset-y-2 order-first items-center pr-2 pl-2.5 pointer-events-none select-none grow-0;
+}
+
+.navigation-icon {
+	@apply w-4 h-4 text-gray-500 fill-current stroke-current;
+}
