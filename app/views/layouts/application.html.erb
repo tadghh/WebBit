@@ -107,14 +107,17 @@
 								<% end %>
 							</div>
 						</div>
-						<div class="flex flex-wrap justify-end items-center pl-5 mx-auto lg:ml-auto lg:pt-0">
-							<div class="mr-3">
+						<div class="flex justify-end pl-5 mx-auto h-full lg:ml-auto lg:pt-0">
+							<div class="flex items-center mr-1 text-center">
 								<% if user_signed_in? %>
-									<%= link_to new_submission_path, class: "hover:text-indigo-600 hover:bg-indigo-50  fill-current text-gray-600 rounded-md block p-2" do %>
-										<%= render_svg "icons/create", styles: "navigation-icon stroke-none", title: "Create submission" %>
+									<%= link_to new_submission_path,
+									 class: "hover:text-indigo-600 hover:bg-indigo-50  fill-current text-gray-600 rounded-md block p-2" do %>
+										<%= render_svg "icons/create",
+										styles: "navigation-icon stroke-none",
+										title: "Create submission" %>
 									<% end %>
 								<% else %>
-									<%= link_to "Login", new_user_session_path, class: "btn btn-small btn-outline mr-2" %>
+									<%= link_to "Login", new_user_session_path, class: " btn btn-small btn-outline mr-2" %>
 									<%= link_to "Sign up", new_user_registration_path, class: "btn btn-small btn-indigo" %>
 								<% end %>
 							</div>
