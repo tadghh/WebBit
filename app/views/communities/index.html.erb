@@ -12,8 +12,13 @@
 			</ul>
 		</div>
 	<% else %>
-
-		<%= render partial: 'shared/empty', locals: { content: "community", cta_text: "Create a submission", cta_path: new_community_path } %>
+		<div class="p-10 text-center">
+			<div class="flex justify-center list-none">
+				<%= render_svg "icons/empty" %>
+			</div>
+			<p class="mb-5">No content...</p>
+			<%= link_to  "Make a submission" , new_community_path, class: "btn btn-indigo"%>
+		</div>
 	<%end %>
 <%end %>
 
