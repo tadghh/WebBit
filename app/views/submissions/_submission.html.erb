@@ -15,7 +15,7 @@
 		<% end %>
 
 		<div class="flex-1 <%= "pl-4" if submission.media.attached?  %>">
-			<h3 class="flex flex-wrap items-center mb-1 text-xl font-semibold hover:text-indigo-600">
+			<h3 class="flex flex-wrap items-center mb-1 text-xl font-semibold text-pink-600 hover:text-indigo-600">
 				<%= link_to submission.title, submission, class: "no-underline"%>
 				<% if submission.url? %>
 					<span class= "pl-2 font-mono text-xs font-normal tracking-tighter text-indigo-400">

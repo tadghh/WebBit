@@ -5,7 +5,8 @@
 
 <%= content_for :primary_content do %>
 	<div class="flex flex-row justify-between">
-		<%= render "voting", submission: @submission %>
+		<%# <%= render "submissions/voting", submission: @submission %>
+		<%= render "shared/voting" , is_comment: false, content: @submission, upvote: upvote_submission_path(@submission), downvote: downvote_submission_path(@submission) %>
 		<div class="flex-1">
 			<p class="text-sm text-gray-600">Posted By: <%= link_to @submission.user.username, profile_path(@submission.user), class:"underline"%> <%= time_ago_in_words(@submission.created_at) + " ago" %></p>
 			<h1 class="mb-6 text-3xl font-bold"><%= @submission.title%></h1>

@@ -20,8 +20,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     # resources :comments
 
     member do
-      put 'upvote', to: 'submisson#upvote'
-      put 'downvote', to: 'submisson#downvote'
+      put 'upvote', to: 'submissions#upvote'
+      put 'downvote', to: 'submissions#downvote'
     end
 
     resources :comments do
