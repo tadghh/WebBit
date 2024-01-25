@@ -33,10 +33,10 @@
 			<%= gravatar_for(@profile, class: "rounded-full w-20 h-20")%>
 		</div>
 		<p class="font-bold"> <%= @profile.username%></p>
-		<p class="font-extralight text-gray-800">Joined <%= @profile.created_at.to_formatted_string(:nice)%></p>
+		<p class="font-extralight text-gray-800">Joined <%= @profile.created_at.to_formatted_s(:nice)%></p>
 
 		<div class="mt-6">
-			<% if user_signed_up? %>
+			<% if user_signed_in? %>
 				<%= link_to "New submission", new_submission_path, class:"btn btn-indigo block w-full"%>
 
 			<% else%>
