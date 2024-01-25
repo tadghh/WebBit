@@ -24,3 +24,10 @@ label {
 .navigation-icon {
 	@apply w-4 h-4 text-gray-500 fill-current stroke-current;
 }
+
+.navigation-icon-colored {
+	@apply w-4 h-4 text-indigo-500 fill-current stroke-current;
+}
+.navigation-icon-colored-lg {
+	@apply w-5 h-5 text-indigo-500 fill-current stroke-current;
+}
