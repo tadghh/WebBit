@@ -1,5 +1,4 @@
 <% content_for :form_wrap do %>
-
 	<h2  class="mb-6 text-3xl font-bold">Edit <%= resource_name.to_s.humanize %></h2>
 
 	<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -36,37 +35,52 @@
 			<%= f.label :current_password, class: "label" %>
 			<%= f.password_field :current_password, autocomplete: "current-password" , class: "input"%>
 			<p  class="text-sm text-gray-600">(we need your current password to confirm your changes)</p>
-
 		</div>
+
 		<div class="mb-6">
 			<h3 class="mb-2 text-xl font-bold">
 				<div class="flex items-center">
 					<%= f.check_box :comment_subscription, class:"fill-current text-indigo-600 rounded focus:ring-indigo-600" %>
 					<%= f.label :comment_subscription, "Receive replies to comment through email.", class:"mb-0 ml-2 font-normal text-gray-600 normal-case tracking-normal" %>
-
 				</div>
-
 			</h3>
 		</div>
 		<%= f.submit "Update",  class: "btn btn-indigo w-full"%>
-
 	<% end %>
-	<div class="my-6">
-		<h3 class="mb-2 text-lg font-bold">
+
+	<div class="flex flex-col items-center my-6">
+		<h3 class="text-2xl font-light">
 			Webbit Premium
 		</h3>
+		<span class="items-start text-start">Benefits</span>
+		<ul class="pb-2 text-sm font-medium list-disc">
+			<li>No Ads</li>
+			<li>Larger media uploads</li>
+			<li>Skip Captchas</li>
+		</ul>
 		<% if user_signed_in? && !current_user.subscribed?%>
-			<%= button_to "Subscribe",checkouts_path,data: {turbo:false},class:"px-3 py-4 bg-indigo-600 text-white w-full text-center rounded"%>
+			<%= button_to "Subscribe",checkouts_path,data: {turbo:false},class:" btn border-2 border-indigo-600 btn-outline py-1 btn-small rounded shadow"%>
 		<% else%>
-			<%= button_to "Manage subscription",billings_path,data: {turbo:false},class:"px-3 py-4 bg-gray-600 text-white w-full text-center rounded"%>
+			<%= button_to "Manage subscription",billings_path,data: {turbo:false},class:"px-3 py-4 bg-gray-600 text-white  text-center rounded"%>
 		<% end%>
 	</div>
-	<hr class="my-6">
-	<h3 class="mb-3 text-2xl font-bold">Cancel my account</h3>
 
-	<p >Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline w-full" %></p>
+	<hr class="my-2">
 
-	<div class="my-3"><%= link_to "Back", :back, class: "underline" %></div>
+	<div class="flex flex-col justify-center items-center">
+		<h3 class="text-2xl font-extralight">Issues?</h3>
+		<p class="my-1 mb-2 text-sm">Click the button below to close your account, we will delete all of your account data after the closure period ends.</p>
+		<%= button_to "Cancel my account",
+		registration_path(resource_name),
+		data: {
+			confirm: "Are you sure?",
+			turbo_confirm: "Are you sure?"
+			},
+			method: :delete,
+			class: "btn btn-outline py-1 btn-small" %>
+	</div>
 
+	<div class="my-3"><%= link_to "<--", :back, class: "font-bold text-2xl underline" %></div>
 <% end %>
+
 <%= render "devise/shared/form_wrap" %>
