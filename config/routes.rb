@@ -2,22 +2,21 @@ require 'sidekiq/web'
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   # /sidekiq page
 
-  authenticate :user, ->(u) { u.admin? } do
-    mount Sidekiq::Web => '/sideqkic'
+  # authenticate :user, ->(u) { u.admin? } do
+  #   mount Sidekiq::Web => '/sideqkic'
 
-    namespace :admin do
-      resources :users
-      root to: 'users#index'
-      resources :submissions
-    end
-  end
+  #   namespace :admin do
+  #     resources :users
+  #     root to: 'users#index'
+  #     resources :submissions
+  #   end
+  # end
 
   resources :communities do
     resources :subscriptions
   end
 
   resources :submissions do
-
     member do
       put 'upvote', to: 'submissions#upvote'
       put 'downvote', to: 'submissions#downvote'
@@ -33,6 +32,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   get 'submissions/unsubscribe/:unsubscribe_hash' => 'submissions#unsubscribe', as: :comment_unsubscribe
   get :search, controller: :application
+
   devise_for :users
   root 'submissions#index'
 

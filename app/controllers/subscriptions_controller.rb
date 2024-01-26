@@ -3,7 +3,7 @@
 # Handles subscriptions of a user to a community
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_community, only: %i[create destroy]
+  before_action :set_community, only: [:create, :destroy] # rubocop:disable Style/SymbolArray
 
   def create # rubocop:disable Metrics/MethodLength
     @subscription = current_user.subscriptions.new
@@ -30,7 +30,7 @@ class SubscriptionsController < ApplicationController
     puts 'Subscription destroyed gross\n\n\n\n\n\n\n/n/n/n/'
 
     respond_to do |format|
-      format.html { redirect_to community_path(@comunity), notice: 'You successfully unsubscribed' }
+      format.html { redirect_to community_path(@community), notice: 'You successfully unsubscribed' }
     end
   end
 

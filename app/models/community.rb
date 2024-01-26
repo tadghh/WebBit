@@ -11,6 +11,7 @@ class Community < ApplicationRecord
 
   has_many :subscriptions
   has_many :users, through: :subscriptions
+
   validates_associated :submissions
 
   friendly_id :slug_candidates, use: %i[slugged finders]
