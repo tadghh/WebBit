@@ -1,4 +1,4 @@
-<div class="p-8 rounded">
+<div class="p-3 w-full rounded">
 	<div class="flex justify-between items-center pb-2 mb-6 border-b">
 		<div class="flex flex-1 items-start">
 			<%= render_svg "icons/conversation", styles: "w-4 mr-2 fill-current text-indigo-600 mr-2 pt-1"%>
@@ -26,11 +26,14 @@
 	<hr class="mb-6">
 	<%# todo: excluded log in, let the user find the confines of their room/session. freedom, "hey look at all these things you cant do" doesnt open a dialog eg "to much work..." %>
 	<% if user_signed_in?%>
-		<div id="<%= dom_id(@community)%>_subscribe">
-			<%= render "subscriptions/actions", community: @community, user:current_user%>
+		<div class="flex justify-center items-center mx-auto"id="<%= dom_id(@community)%>_subscribe">
+			<%= render "subscriptions/actions",
+			subscription: @subscription,
+			community: @community,
+			user: current_user%>
 		</div>
 	<%end%>
-	<hr class="mb-6">
+
 	<div>
 		<p>Description</p>
 		<div class="my-3 prose prose-indigo">

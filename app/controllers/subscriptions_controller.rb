@@ -6,9 +6,9 @@ class SubscriptionsController < ApplicationController
   before_action :set_community, only: %i[create destroy]
 
   def create # rubocop:disable Metrics/MethodLength
-    @subscription = @community.subscriptions.new
+    @subscription = current_user.subscriptions.new
     @subscription.community = @community
-
+    puts 'Subscription created gross\n\n\n\n\n\n\n/n/n/n/'
     respond_to do |format|
       if @subscription.save
         format.turbo_stream
@@ -25,12 +25,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @subscription = @community.subscriptions.where(user_id: current_user).first.destroy
+    @subscription = @community.subscriptions.where(user: current_user).first
+    @subscription.destroy
+    puts 'Subscription destroyed gross\n\n\n\n\n\n\n/n/n/n/'
+
     respond_to do |format|
-      format.html do
-        redirect_back fallback_location: community_path(@community),
-                      notice: 'No longer part of the X_NAME community :).'
-      end
+      format.html { redirect_to community_path(@comunity), notice: 'You successfully unsubscribed' }
     end
   end
 
