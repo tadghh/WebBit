@@ -122,10 +122,10 @@
 								<% end %>
 							</div>
 							<% if user_signed_in? %>
-								<div data-controller="dropdown" class="relative px-3 py-2 pr-4 mx-auto ml-1 text-gray-600 bg-white rounded border border-gray-400 hover:bg-gray-200">
+								<div data-controller="dropdown" class="relative mx-auto text-gray-600 bg-white rounded border border-gray-400 hover:bg-gray-200">
 
 									<%= link_to "#",
-									 class: "no-underline flex justify-between text-sm tracking-wide items-center font-semibold",
+									 class: "no-underline flex justify-between text-sm tracking-wide ml-1  px-3 py-2  w-full items-center font-semibold",
 									 data: {
 											action: "click->dropdown#toggle click@window->dropdown#hide"
 										} do %>
@@ -133,7 +133,7 @@
 										<%= render_svg "icons/chevron-down", styles: "ml-2 navigation-icon" %>
 									<% end %>
 									<div class="relative">
-										<ul class="hidden absolute top-2 -right-4 bg-white rounded rounded-tr-none border border-gray-400 shadow-lg min-w-52" data-dropdown-target="menu">
+										<ul class="hidden absolute right-[11.96rem] bg-white rounded border border-gray-400 shadow-lg transform translate-x-full min-w-48" data-dropdown-target="menu">
 											<% if current_user.admin?%>
 												<li>
 													<%= link_to admin_root_path, class:"   dropdown-menu group" do %>
