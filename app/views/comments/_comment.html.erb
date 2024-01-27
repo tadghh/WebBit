@@ -1,6 +1,10 @@
 <%= turbo_frame_tag comment do%>
 	<div class="flex items-start p-4 my-4 rounded border">
-		<%= render "shared/voting" , is_comment: true, content: comment, upvote: upvote_submission_comment_path(@submission, comment), downvote: downvote_submission_comment_path(@submission, comment) %>
+		<%= render "shared/voting" ,
+		is_comment: true,
+		content: comment,
+		upvote: upvote_submission_comment_path(@submission, comment),
+		downvote: downvote_submission_comment_path(@submission, comment) %>
 		<div>
 			<p class="font-semibold">
 				<%= comment.user.username%>

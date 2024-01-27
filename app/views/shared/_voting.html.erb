@@ -8,10 +8,10 @@
 		render_svg("icons/down-vote", styles: "btn-voting-icon")
 		end
 	:
-		link_to(new_user_session_path, class: "btn-voting group") do
+		link_to(new_user_session_path, class: "btn-voting group", data: { turbo: "false" }) do
 		render_svg("icons/up-vote", styles: "btn-voting-icon") +
 		content_tag(:div, content.total_vote_count, id: "#{dom_id(content)}_votes_count", class: "btn-voting-count  ") +
-		link_to(new_user_session_path, class: "btn-voting group") { render_svg("icons/down-vote", styles: "btn-voting-icon") }
+		link_to(new_user_session_path, class: "btn-voting group",data: { turbo: "false" }) { render_svg("icons/down-vote", styles: "btn-voting-icon") }
 		end
 	%>
 </div>
